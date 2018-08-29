@@ -1,0 +1,4 @@
+{
+    "http.proxy": "http://pac.zscalertwo.net/sanmina.com/wpad.dat",
+    "http.proxyAuthorization": null
+}

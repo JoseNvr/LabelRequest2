@@ -1,0 +1,86 @@
+<div class='container'>
+  <div class='col-sm-8 col-sm-offset-2  mtop-10'>
+    <div class="row">
+      <div class="col-xs-6">
+        <h3 class="mtop-40 mbottom-5">Welcome {{applicationconfig.name}}</h3>
+      </div>
+      <div class="col-xs-6">
+        <img src="assets/sanmina/sanmina-100x56.png" class="pull-right">
+      </div>
+    </div>
+    <div class="row panel panel-default">
+      <div class="col-xs-12 bg-gray-darker">
+        <img src="assets/sanmina/secure-access-header.png" class="mtop-20 img-responsive center-block">
+      </div>
+      <form class="form col-xs-12">
+        <div class="clearfix">
+          <div class="col-lg-6 col-md-5 mtop-15 clearfix">
+
+            <div class="row">
+              <div class="col-md-12 form-group">
+                <label>Usuario Universal</label>
+                <input class="form-control" type="text" [(ngModel)]="params.user" placeholder="name_lasname" name = "user" #user = "ngModel">
+              </div>
+              <div class="col-md-12 form-group">
+                <label>Password</label>
+                <input class="form-control" type="password" [(ngModel)]="params.password" placeholder="***********" name = "password" #password = "ngModel">
+              </div>
+              <div class="col-md-12">
+                <a class="btn btn-danger btn-lg btn-loading col-sm-12 col-xs-12 mtop-5" (click)="singin()" >
+                  <span class="content">Entrar</span>
+                </a>
+                <!-- <button  class="btn btn-danger btn-lg btn-loading col-sm-12 col-xs-12 mtop-5" (click)= "singin()">
+                  <span class="content">Entrar</span>
+                </button> -->
+              </div>
+            </div>
+            <div  class="row">
+              <div class="col-md-12 mtop-50">
+                <a  id="googleButton" class="btn btn-primary btn-block mtop-50"(click)="singinwhitgoogle()">
+                  <span class="content"><i class="fa fa-google"></i> Cuenta de Google</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-7 mtop-10 mbottom-10">
+            <div class="clearfix well well-info">
+              <div class="col-xs-12">
+                <h5 class="text-center">SANMINA CORPORATION ELECTRONIC<br/> WORKSPACE LEGAL NOTICE
+                  </h5>
+                  <p class="text-smaller">
+                    This is a Sanmina Corporation electronic workspace. This system is provided for the business use of Sanmina and its Partners,
+                    including customers and suppliers. All information, including personal information, placed on or sent
+                    over this system may be monitored, examined, recorded, and/or copied, subject to the terms of any Non-Disclosure
+                    Agreement that may exist between Sanmina and its Partners. This system is also governed by all applicable
+                    federal, state and local laws, including U.S. export laws. Accordingly, you may not place or send any
+                    information over this system that violates any of those laws or infringes on the rights of any third
+                    party. For example, information known to fall under the requirements of the International Traffic in
+                    Arms Regulations (ITAR) or Export Administration Regulations (EAR) should not be placed on or sent over
+                    this system. Unauthorized use or access to this system is strictly prohibited and may be subject to legal
+                    action. Complete terms and conditions of use are available <a href="//www.sanmina.com/company-profile/legal-information/index.php"
+                      target="_blank">here</a>. By use of this system, the user consents to the terms of this Notice.
+                  </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modals -->
+<!-- Confirm Modal -->
+<div id="loadingModal" class="modal uppercase" tabindex="-1" role="dialog" aria-labelledby="LoadingModal" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="ion-close-round"></span></button>
+        <h4 class="modal-title" id="mySmallModalLabel">Please Wait... <i class="ion-loading"></i></h4>
+      </div>
+      <div class="modal-body">
+        {{loadingMessage}}
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>

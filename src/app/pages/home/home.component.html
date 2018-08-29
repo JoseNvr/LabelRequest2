@@ -1,0 +1,165 @@
+  <!-- !Primary nav bar -->
+  <div></div>
+  <div>
+    <nav class="navbar navbar-fixed-top navbar-default margin-0 col-xs-12 padding-0" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle mright-0" data-toggle="collapse" data-target="#menu">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <img alt="" src="{{ applicationconfig.logo }}"  class="pull-left mtop-5 imgIcon">
+        </div>
+        <!-- User -->
+        <div class="pull-right mtop-10 hidden-xs">
+          <a  class="btn btn-default btn-circle pull-right mleft-15 mtop-5" (click)="logout()">
+            <span class="glyphicon glyphicon-off"></span>
+          </a>
+          <div class="pull-right mleft-20 hidden-md hidden-sm hidden-xs">
+            <div id="profilePopOver" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-title="User information">
+              <img  src = "http://148.164.96.4:8080/SanmAPI/getImageUser/?employee={{user.data.number}}" alt="User profile picture"
+                class="img-circle img-header">{{user.data.username}}
+              <div id="contentProfilePopOver" style="display: none">
+                <div class="row">
+                  <div class="col-md-4">
+                    <img class="img-circle" width="80" height="80" 
+                     src = "http://148.164.96.4:8080/SanmAPI/getImageUser/?employee={{user.data.number}}"/>
+                  </div>
+                  <div class="col-md-3">
+                    <form class="form">
+                      <div id="NamePopover">{{user.data.username}}</div>
+                      <div id="employeNumber">{{user.data.number}}</div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse pull-right" id="menu">
+          <ul class="nav navbar-nav">
+            <!--Without submenu-->
+            <li class="pointer">
+              <a  href=''>hello
+              </a>
+              <!--With Sub Menu
+               <a  class="dopdown-toggle" data-toggle='dropdown'>
+                namesubmenu
+                <i class="ion-arrow-down-b"></i>
+              </a>
+              <ul class="dropdown-menu multi-level">
+                <li class="pointer dropdown-submenu" >
+                  <a  href=''>
+                    submenu1.name
+                  </a>
+                  With Sub Menu
+                  <a  class="dopdown-toggle" data-toggle='dropdown'>
+                    submenu1.name
+                    <i class="ion-arrow-down-b"></i>
+                  </a>
+                  <ul class="dropdown-menu multi-level">
+                    <li class="pointer" >
+                      <a href="">subMenu2.name</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>-->
+            </li>
+          </ul>
+        </div>
+      </div> 
+    </nav>
+    <nav class="navbar navbar-static-top navbar-inverse col-xs-12" id="secondaryNavbar">
+      <div class="container-fluid">
+        <div class="navbar-header mtop-10">
+          <div class="btn-group">
+            <a class="dropdown-toggle white pointer" data-toggle="dropdown">dataAuth.plant.plant <span
+                class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li ><a class="pointer">plant.plant</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="pull-right">
+          <a href="/applicationConfig.applicationPath/" class="uppercase text-medium text-gray-light">
+            {{ applicationconfig.name }}
+            <img src="assets/sanmina/sanmina-100x56.png" class="iconToright img-logo" />
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <!-- !Content -->
+  <div ></div>
+  <!-- Modals -->
+  <!-- Confirm Modal -->
+  <div id="loadingModal" class="modal uppercase" tabindex="-1" role="dialog" aria-labelledby="LoadingModal" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="ion-close-round"></span></button>
+          <h4 class="modal-title" id="mySmallModalLabel">Please Wait... <i class="ion-loading"></i></h4>
+        </div>
+        <div class="modal-body">
+          loadingMessage
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+
+  <div id="selectPlant" class="modal fade uppercase" tabindex="-1" role="dialog" aria-labelledby="SelectModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Select a Plant</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <button style="height: 150px;"  class="btn btn-lg btn-primary btn-block mtop-30 text-center">plant.plant</button>
+            </div>
+            <div  class="col-md-12 text-center">
+              <h4 class="modal-title">Setting plant and getting menus plese wait...</h4>
+            </div>
+            <div class="col-md-12 text-center">
+              <h4 class="modal-title">You don't have assigned plant, please contact IT</h4>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+
+  <div >
+    <div id="confirmModal" class="modal fade uppercase" tabindex="-1" role="dialog" aria-labelledby="ConfirmModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="ion-close-round"></span></button>
+            <h4 class="modal-title" id="titleAction"></h4>
+          </div>
+          <div id="messageAction" class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" id="saveConfirmButton" class="btn btn-success"><i class="ion-checkmark-round"></i> Save</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+    <div id="footer" class="col-md-12">
+      <div class="text-center">
+        <strong class="uppercase"><a href="http://www.sanmina.com/company-profile/legal-information/" target="_blank"><font><u>LEGAL
+                INFORMATION </u></font></a> <font color="red">powered by:</font> GUAD DEVELOPMENT SOLUTIONS TEAM - {{currentYear}}
+          <a href="http://www.sanmina.com/company-profile/safe-harbor-statement/"> <u>SAFE HARBOR STATEMENT</u></a></strong>
+      </div>
+      <div class="col-md-offset-12" id="iconFooter">
+        <img class="img-circle" src="assets/sanmina/sanmina-100x56.png" id="bottomImg" />
+      </div>
+    </div>
+  </div>

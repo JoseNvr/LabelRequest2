@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {ConfigService} from '../../config/config.service';
 import { Router } from '@angular/router';
 
 import {User} from '../../interfaces/User';
 import { ApplicationConfig } from '../../applicationConfig';
 import { AuthService, GoogleLoginProvider } from 'angular-6-social-login';
-import PNotify from 'pnotify/dist/es/PNotifyCompat';
+import {Notify} from '../../notify/notify';
+
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
  
 declare var $: any;
@@ -16,6 +18,7 @@ declare var $: any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('LoadingModal') loading: ModalDirective;
   params: { user?: string, password?: string, application?: string } = { application: "Task IT"};
   applicationconfig: ApplicationConfig = {
     name: "TaskIT 2.0",
@@ -32,59 +35,65 @@ export class LoginComponent implements OnInit {
 
   constructor(public configService: ConfigService,
               public router: Router,
-              private socialAuthService: AuthService) { }
+              private socialAuthService: AuthService,
+              private notify: Notify) { }
 
   ngOnInit() {  
-    new PNotify({
-      title: 'Login Success',
-      text: "message",
-      type: 'success',
-      styling: 'bootstrap3',
-      delay: '2000',
-    
-    });
     
   }
 
   singin(){
-    $('#loadingModal').modal('show');
-    this.configService.getUserInfo("http://localhost:8080/TaskIT/Get/User/Info/", this.params).subscribe((res: User) => this.user = {
+   // $('#loadingModal').modal('show');
+    this.loading.show();
+    this.configService.getInfo("http://localhost:8080/TaskIT/Get/User/Info/", this.params).subscribe((res: User) => this.user = {
       success: res['succes'],
       message: res['message'],
       data: res['data']
     }, error => {
       console.log(error);
-      $('#loadingModal').modal('hide');
+    //  $('#loadingModal').modal('hide');
+     this.loading.hide();
+      this.notify.setNotification('Error', 'Ingrese un usuario', 'error');
+
     }, () => {
-      console.log(this.user);
       if (this.user.message.includes("Welcome")){
         localStorage.setItem('currentUser', JSON.stringify(this.user));
         this.router.navigate(['']);
-        $("#loadingModal").modal('hide');
+       
+      }else{
+        //$("#loadingModal").modal('hide');
+        this.loading.hide();
+        this.notify.setNotification('No Autorizado', this.user.message, 'notice')
       }
     });
   }
   singinwhitgoogle(){
-    $("#loadingModal").modal('show');
-    
+    //$("#loadingModal").modal('show');
+    this.loading.show();
     let socialPlatformProvider;
     socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
         this.params.user = userData.email;
         // Now sign-in with userData      
-        this.configService.getUserInfo("http://localhost:8080/TaskIT/Get/User/Info/", this.params).subscribe((res: User) => this.user = {
+        this.configService.getInfo("http://localhost:8080/TaskIT/Get/User/Info/", this.params).subscribe((res: User) => this.user = {
           success: res['succes'],
           message: res['message'],
           data: res['data']
         }, error => {
           console.log(error);
+          this.loading.hide();
+          this.notify.setNotification('Error', 'sesion no iniciada con google', 'error');
         }, () => {
           console.log(this.user);
           if (this.user.message.includes("Welcome")) {
             localStorage.setItem('currentUser', JSON.stringify(this.user));
             this.router.navigate(['']);
-            $("#loadingModal").modal('hide');
+            //$("#loadingModal").modal('hide');
+          } else {
+            //$("#loadingModal").modal('hide');
+            this.loading.hide();
+            this.notify.setNotification('No Autorizado', this.user.message, 'notice')
           }
         });  
       }, error =>{

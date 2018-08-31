@@ -10,8 +10,7 @@ export class ConfigService {
   constructor(private http: HttpClient) {
   
    }
-  getUserInfo(urlAPI, data) {
-
+  getInfo(urlAPI, data) {
     return this.http.get(urlAPI, { params: data });
   }
 }

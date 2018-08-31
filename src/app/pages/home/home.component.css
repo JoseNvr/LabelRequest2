@@ -161,6 +161,12 @@ white:hover,white:focus{
     color: red;
 }
 
+#info{
+    color: #515661;
+    font-weight: bold;
+    position: relative;
+    bottom: 8px;
+}
 /*#profilePopOver{
         z-index: -1; position:relative;
 }*/

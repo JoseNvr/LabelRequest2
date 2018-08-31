@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http'
 import {ConfigService} from './config/config.service';
+import {Notify} from './notify/notify';
 import { LoginAct } from './config/config.loginact';
 import { HomeAct } from './config/config.homeact';
 
@@ -15,6 +16,9 @@ import {routes} from './app.routes';
 import { LoginComponent } from './pages/login/login.component';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from "angular-6-social-login";
 
+import {PopoverModule} from 'ngx-bootstrap/popover';
+import {ModalModule} from 'ngx-bootstrap/modal';
+ 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
     [
@@ -38,6 +42,8 @@ export function getAuthServiceConfigs() {
     HttpClientModule,
     FormsModule,
     SocialLoginModule,
+    PopoverModule.forRoot(),
+    ModalModule.forRoot(),
     RouterModule.forRoot(routes, {
       useHash: true,
       initialNavigation: "enabled"
@@ -46,6 +52,7 @@ export function getAuthServiceConfigs() {
   providers: [ConfigService,
                LoginAct,
                HomeAct,
+               Notify,
                {
                provide: AuthServiceConfig,
                useFactory: getAuthServiceConfigs

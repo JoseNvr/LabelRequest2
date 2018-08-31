@@ -19,10 +19,13 @@
             <span class="glyphicon glyphicon-off"></span>
           </a>
           <div class="pull-right mleft-20 hidden-md hidden-sm hidden-xs">
-            <div id="profilePopOver" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-title="User information">
+            <div id="profilePopOver">
               <img  src = "http://148.164.96.4:8080/SanmAPI/getImageUser/?employee={{user.data.number}}" alt="User profile picture"
-                class="img-circle img-header">{{user.data.username}}
-              <div id="contentProfilePopOver" style="display: none">
+                class="img-circle img-header" triggers="mouseenter:mouseleave" [popover]="popTemplate" placement="auto" >{{user.data.username}}
+
+              <ng-template #popTemplate>
+              <div id="info">User information</div>
+              <div id="contentProfilePopOver">
                 <div class="row">
                   <div class="col-md-4">
                     <img class="img-circle" width="80" height="80" 
@@ -30,12 +33,13 @@
                   </div>
                   <div class="col-md-3">
                     <form class="form">
-                      <div id="NamePopover">{{user.data.username}}</div>
+                      <div id="NamePopover">{{user.data.name}}</div>
                       <div id="employeNumber">{{user.data.number}}</div>
                     </form>
                   </div>
                 </div>
               </div>
+            </ng-template>
             </div>
           </div>
         </div>
@@ -43,8 +47,8 @@
         <div class="collapse navbar-collapse pull-right" id="menu">
           <ul class="nav navbar-nav">
             <!--Without submenu-->
-            <li class="pointer">
-              <a  href=''>hello
+            <li *ngFor="let menu of menuList" class="pointer">
+              <a  href='menu.link'>{{menu.name}}
               </a>
               <!--With Sub Menu
                <a  class="dopdown-toggle" data-toggle='dropdown'>
@@ -77,9 +81,9 @@
       <div class="container-fluid">
         <div class="navbar-header mtop-10">
           <div class="btn-group">
-            <a class="dropdown-toggle white pointer" data-toggle="dropdown">dataAuth.plant.plant <span
-                class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
+            <a class="dropdown-toggle white pointer" data-toggle="dropdown">{{plant?.data?.plants[0]?.plant}}<span
+                *ngIf="plant?.data?.plants.length > 1" class="caret"></span></a>
+            <ul *ngIf="plant?.data?.plants.length > 1" class="dropdown-menu" role="menu">
               <li ><a class="pointer">plant.plant</a></li>
             </ul>
           </div>
@@ -162,4 +166,19 @@
         <img class="img-circle" src="assets/sanmina/sanmina-100x56.png" id="bottomImg" />
       </div>
     </div>
+  </div>
+  <!-- Modals -->
+  <!-- Confirm Modal -->
+  <div bsModal #modalCharg='bs-modal' class="modal uppercase" tabindex="-1" role="dialog" aria-labelledby="LoadingModal" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="ion-close-round"></span></button>
+          <h4 class="modal-title" id="mySmallModalLabel">Please Wait... <i class="ion-loading"></i></h4>
+        </div>
+        <div class="modal-body">
+          Cargando información del usuario...
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
   </div>

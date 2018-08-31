@@ -1,10 +1,10 @@
 export interface User {
     success: boolean;
     message: string;
-    data: Data;
+    data: info;
 }
 
-export interface Data {
+export interface info {
     active: boolean;
     email: string;
     fullName: string;

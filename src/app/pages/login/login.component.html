@@ -19,7 +19,7 @@
             <div class="row">
               <div class="col-md-12 form-group">
                 <label>Usuario Universal</label>
-                <input class="form-control" type="text" [(ngModel)]="params.user" placeholder="name_lasname" name = "user" #user = "ngModel">
+                <input class="form-control" type="text" oninput="this.value = this.value.toUpperCase()" [(ngModel)]="params.user" placeholder="name_lasname" name = "user" #user = "ngModel">
               </div>
               <div class="col-md-12 form-group">
                 <label>Password</label>

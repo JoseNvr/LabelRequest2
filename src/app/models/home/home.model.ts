@@ -1,10 +1,10 @@
-export interface User {
+export interface GeneralResponse {
     success: boolean;
     message: string;
-    data: info;
+    data: any;
 }
 
-export interface info {
+export interface User {
     active: boolean;
     email: string;
     fullName: string;
@@ -12,4 +12,11 @@ export interface info {
     name: string;
     number: number;
     username: string;
+    message: string;
+}
+
+export interface Menu {
+    link: string;
+    name: string;
+
 }

@@ -23,19 +23,20 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css" , 
-              "sanmina/bootstrap.min.css",
-              "sanmina/jquery-ui.css",
-              "sanmina/pnotify.custom.css",
+              "src/styles.css",
+              "src/sanmina/bootstrap.min.css",
+              "src/sanmina/jquery-ui.css",
+              "src/sanmina/pnotify.custom.css",
               "./node_modules/font-awesome/css/font-awesome.css"
             ],
-            "scripts": ["sanmina/jquery.min.js",
-                        "sanmina/jquery-ui.js",
-                        "sanmina/jquery-ui-timepicker-addon.min.js",
-                        "sanmina/popper.js",
-                        "sanmina/bootstrap.min.js",
-                        "sanmina/pnotify.js"
-                        ]
+            "scripts": [
+              "src/sanmina/jquery.min.js",
+              "src/sanmina/jquery-ui.js",
+              "src/sanmina/jquery-ui-timepicker-addon.min.js",
+              "src/sanmina/popper.js",
+              "src/sanmina/bootstrap.min.js",
+              "src/sanmina/pnotify.js"
+            ]
           },
           "configurations": {
             "production": {

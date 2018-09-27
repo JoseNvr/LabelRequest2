@@ -20,8 +20,8 @@
           </a>
           <div class="pull-right mleft-20 hidden-md hidden-sm hidden-xs">
             <div id="profilePopOver">
-              <img  src = "http://148.164.96.4:8080/SanmAPI/getImageUser/?employee={{user.data.number}}" alt="User profile picture"
-                class="img-circle img-header" triggers="mouseenter:mouseleave" [popover]="popTemplate" placement="auto" >{{user.data.username}}
+              <img  src = "http://148.164.96.4:8080/SanmAPI/getImageUser/?employee={{user.number}}" alt="User profile picture"
+                class="img-circle img-header" triggers="mouseenter:mouseleave" [popover]="popTemplate" placement="auto" >{{user.username}}
 
               <ng-template #popTemplate>
               <div id="info">User information</div>
@@ -29,12 +29,12 @@
                 <div class="row">
                   <div class="col-md-4">
                     <img class="img-circle" width="80" height="80" 
-                     src = "http://148.164.96.4:8080/SanmAPI/getImageUser/?employee={{user.data.number}}"/>
+                     src = "http://148.164.96.4:8080/SanmAPI/getImageUser/?employee={{user.number}}"/>
                   </div>
                   <div class="col-md-3">
                     <form class="form">
-                      <div id="NamePopover">{{user.data.name}}</div>
-                      <div id="employeNumber">{{user.data.number}}</div>
+                      <div id="NamePopover">{{user.name}}</div>
+                      <div id="employeNumber">{{user.number}}</div>
                     </form>
                   </div>
                 </div>

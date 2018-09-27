@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {ConfigService} from '../../config/config.service';
+import {LoginService} from '../../modules/login/login.service';
 import { Router } from '@angular/router';
 
-import {User} from '../../interfaces/User';
-import { ApplicationConfig } from '../../applicationConfig';
+import {User, GeneralResponse} from '../../models/login/login.model';
 import { AuthService, GoogleLoginProvider } from 'angular-6-social-login';
-import {Notify} from '../../notify/notify';
+import {Notify} from '../../modules/notify/notify';
 
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { Constants } from '../../helpers/constats';
+import { Subscription } from 'rxjs';
 
  
 declare var $: any;
@@ -19,21 +20,15 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit {
   @ViewChild('LoadingModal') loading: ModalDirective;
+  private generalresponse: GeneralResponse;
+  private subscribeUser: Subscription;
   params: { user?: string, password?: string, application?: string } = { application: "Task IT"};
-  applicationconfig: ApplicationConfig = {
-    name: "TaskIT 2.0",
-    application: "Task IT",
-    applicationPath: "TaskIT",
-    localStorage: "dataAuth_TaskIT",
-    logo: "assets/sanmina/application/taskit.png",
-    ico: "assets/sanmina/application/taskit.ico",
-    logged: false
-  }
+  applicationconfig = {name: Constants.Name, application: Constants.application, applicationPath: Constants.applicationPath, logo: Constants.logo, ico: Constants.ico}
   loadingMessage = "We are getting your information for Google please wait...";
   user: User;
 
 
-  constructor(public configService: ConfigService,
+  constructor(public LoginService: LoginService,
               public router: Router,
               private socialAuthService: AuthService,
               private notify: Notify) { }
@@ -45,25 +40,26 @@ export class LoginComponent implements OnInit {
   singin(){
    // $('#loadingModal').modal('show');
     this.loading.show();
-    this.configService.getInfo("http://localhost:8080/TaskIT/Get/User/Info/", this.params).subscribe((res: User) => this.user = {
-      success: res['succes'],
-      message: res['message'],
-      data: res['data']
+    this.subscribeUser =this.LoginService.getUserInfo(this.params).subscribe(res => {
+      this.generalresponse = res;      
+      this.user = this.generalresponse.data;
     }, error => {
+
       console.log(error);
     //  $('#loadingModal').modal('hide');
      this.loading.hide();
       this.notify.setNotification('Error', 'Ingrese un usuario', 'error');
 
     }, () => {
-      if (this.user.message.includes("Welcome")){
+      if (this.generalresponse.message.includes("Welcome")){
         localStorage.setItem('currentUser', JSON.stringify(this.user));
+        localStorage.setItem('message', this.generalresponse.message);
         this.router.navigate(['']);
        
       }else{
         //$("#loadingModal").modal('hide');
         this.loading.hide();
-        this.notify.setNotification('No Autorizado', this.user.message, 'notice')
+        this.notify.setNotification('No Autorizado', this.generalresponse.message, 'notice')
       }
     });
   }
@@ -76,24 +72,24 @@ export class LoginComponent implements OnInit {
       (userData) => {
         this.params.user = userData.email;
         // Now sign-in with userData      
-        this.configService.getInfo("http://localhost:8080/TaskIT/Get/User/Info/", this.params).subscribe((res: User) => this.user = {
-          success: res['succes'],
-          message: res['message'],
-          data: res['data']
+        this.loading.show();
+        this.subscribeUser = this.LoginService.getUserInfo(this.params).subscribe(res => {
+          this.generalresponse = res;
+          this.user = this.generalresponse.data;
         }, error => {
           console.log(error);
           this.loading.hide();
           this.notify.setNotification('Error', 'sesion no iniciada con google', 'error');
         }, () => {
-          console.log(this.user);
-          if (this.user.message.includes("Welcome")) {
+          if (this.generalresponse.message.includes("Welcome")) {
             localStorage.setItem('currentUser', JSON.stringify(this.user));
+            localStorage.setItem('message', this.generalresponse.message);
             this.router.navigate(['']);
             //$("#loadingModal").modal('hide');
           } else {
             //$("#loadingModal").modal('hide');
             this.loading.hide();
-            this.notify.setNotification('No Autorizado', this.user.message, 'notice')
+            this.notify.setNotification('No Autorizado', this.generalresponse.message, 'notice')
           }
         });  
       }, error =>{
@@ -101,5 +97,10 @@ export class LoginComponent implements OnInit {
       }
     );
 
+  }
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscribeUser.unsubscribe();
   }
 }

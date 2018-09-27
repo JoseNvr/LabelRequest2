@@ -5,58 +5,36 @@ import { RouterModule } from '@angular/router';
 
 
 import { HttpClientModule } from '@angular/common/http'
-import {ConfigService} from './config/config.service';
-import {Notify} from './notify/notify';
-import { LoginAct } from './config/config.loginact';
-import { HomeAct } from './config/config.homeact';
+import {LoginService} from './modules/login/login.service';
+import {Notify} from './modules/notify/notify';
+import { LoginAct } from './loginblock.service';
+import { HomeAct } from './homeblock.service';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
-import {routes} from './app.routes';
-import { LoginComponent } from './pages/login/login.component';
-import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from "angular-6-social-login";
+
+import { AppRoutingModule } from './routes.module';
 
 import {PopoverModule} from 'ngx-bootstrap/popover';
 import {ModalModule} from 'ngx-bootstrap/modal';
  
-export function getAuthServiceConfigs() {
-  let config = new AuthServiceConfig(
-    [
-      {
-        id: GoogleLoginProvider.PROVIDER_ID,
-        provider: new GoogleLoginProvider("750475401698-q97li2b37sm0d94750upvg5sbbkv2vd5.apps.googleusercontent.com")
-      },
-    ]
-  );
-  return config;
-}
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    SocialLoginModule,
+    AppRoutingModule,
     PopoverModule.forRoot(),
     ModalModule.forRoot(),
-    RouterModule.forRoot(routes, {
-      useHash: true,
-      initialNavigation: "enabled"
-    })
   ],
-  providers: [ConfigService,
+  providers: [LoginService,
                LoginAct,
                HomeAct,
-               Notify,
-               {
-               provide: AuthServiceConfig,
-               useFactory: getAuthServiceConfigs
-               }
+               Notify
   ],
   bootstrap: [AppComponent]
 })

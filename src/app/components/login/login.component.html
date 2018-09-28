@@ -71,16 +71,19 @@
 
 <!-- Modals -->
 <!-- Confirm Modal -->
-<div bsModal #LoadingModal='bs-modal' class="modal uppercase" tabindex="-1" role="dialog" aria-labelledby="LoadingModal" aria-hidden="true">
-  <div class="modal-dialog modal-md">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="ion-close-round"></span></button>
-        <h4 class="modal-title" id="mySmallModalLabel">Please Wait... <i class="ion-loading"></i></h4>
-      </div>
-      <div class="modal-body">
-        {{loadingMessage}}
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
+<div class="loadingmodal">
+  <div bsModal #LoadingModal='bs-modal' class="modal uppercase" tabindex="-1" role="dialog" aria-labelledby="LoadingModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="ion-close-round"></span></button>
+          <h4 class="modal-title" id="mySmallModalLabel">Please Wait... <i class="ion-loading"></i></h4>
+        </div>
+        <div class="modal-body">
+          {{loadingMessage}}
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
 </div>

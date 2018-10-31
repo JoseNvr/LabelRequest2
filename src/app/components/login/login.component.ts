@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   private generalresponse: GeneralResponse;
   private subscribeUser: Subscription;
   params: { user?: string, password?: string, application?: string } = { application: "Task IT"};
-  applicationconfig = {name: Constants.Name, application: Constants.application, applicationPath: Constants.applicationPath, logo: Constants.logo, ico: Constants.ico}
+  applicationconfig = { name: Constants.application + " " + Constants.Version, application: Constants.application, applicationPath: Constants.applicationPath, logo: Constants.logo, ico: Constants.ico}
   loadingMessage = "We are getting your information for Google please wait...";
   user: User;
 

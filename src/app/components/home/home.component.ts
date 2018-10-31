@@ -18,7 +18,7 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit {
   @ViewChild('modalCharg') charging: ModalDirective;
-  applicationconfig = {name: Constants.Name, application: Constants.application, applicationPath: Constants.applicationPath, logo: Constants.logo, ico: Constants.ico }
+  applicationconfig = { version: Constants.Version, application: Constants.application, applicationPath: Constants.applicationPath, logo: Constants.logo, ico: Constants.ico, plant: Constants.plant }
   public subscriptions: Subscription[] = [];
   user: User;
   plant: any;

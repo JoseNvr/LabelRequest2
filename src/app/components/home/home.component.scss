@@ -120,10 +120,11 @@ white:hover,white:focus{
 .navbar{
     border-bottom-color: red;
     border-bottom-width: 3px;
+    font-size: 105%;
 }
 #secondaryNavbar{
     position: absolute;
-    top: 66px;
+    top: 59px;
     height: 33px;
     min-height: 1px;
     box-shadow: 1px 5px 12px grey;
@@ -140,6 +141,31 @@ white:hover,white:focus{
     margin-right: -14px;
 }
 
+.plant {
+    color:white; 
+    text-align:right; 
+    margin-top:8px;
+}
+.ActMenu{
+    color:white; 
+    margin-left: -42px;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+.ActMenu a{
+    height: 42px;
+
+}
+.ActMenu i{
+    top: 0px;
+    margin: 0px;
+    line-height: 0px !important;
+}
+.pMenu{
+    color:white; 
+    margin-right:90%;
+    margin-top: 21px;
+}
 #footer {
     border-style: solid;
     border-top-color: black;
@@ -151,22 +177,18 @@ white:hover,white:focus{
     height:20px;
 }
 
-.popover{
-    width: 100%;
-    margin-left: -70px;
-    margin-top: -20px; 
-}
 
 #NamePopover{
     color: red;
+    width: 200px;
+}
+.logBy{
+     width: 200px;
+}
+.shadow{
+     box-shadow: 5px 15px 40px 5px rgba(0,0,0,0.2);
 }
 
-#info{
-    color: #515661;
-    font-weight: bold;
-    position: relative;
-    bottom: 8px;
-}
 /*#profilePopOver{
         z-index: -1; position:relative;
 }*/
@@ -175,3 +197,5 @@ white:hover,white:focus{
             position: unset;
     }        
 }
+
+

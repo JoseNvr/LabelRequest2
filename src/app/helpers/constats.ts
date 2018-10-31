@@ -5,7 +5,7 @@ export class Constants {
 
     public static SERVER: string = Constants.PRODUCTION ? '/TaskIT/' : 'http://127.0.0.1:8080/TaskIT/';
 
-    public static Name: String = "TaskIT 2.0";
+    public static Version: String = "2.0";
 
     public static application: String = "Task IT";
 

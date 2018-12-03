@@ -33,33 +33,29 @@
         <div class="collapse navbar-collapse pull-right" id="menu">
           <ul class="nav navbar-nav">
             <!--Without submenu-->
-            <li *ngFor="let menu of menuList" class="pointer">
-              <a *ngIf="menu.name == 'Home'" routerLink='{{menu.link}}'><i class="fa fa-home"></i></a>
-              <a *ngIf="menu.name != 'Home'" routerLink='{{menu.link}}'>{{menu.name}}</a>
+            <li *ngFor="let menu of (menuList | sort:'order')" class="pointer">
+              <a *ngIf="menu.name != 'Manual' && menu.name == 'Home'" routerLink='{{menu.link}}' (click)="changeRoute(menu.name)"><i
+                  class="fa fa-home"></i></a>
+              <a *ngIf="menu.name != 'Manual' && menu.name != 'Home' && menu.idParent == 0 && menu.name != 'Admin'" routerLink='{{menu.link}}'
+                (click)="changeRoute(menu.name)">{{menu.name}}</a>
               <a *ngIf="menu.name === 'Manual'" target="_blank" href='{{menu.link}}'>{{menu.name}}</a>
-             
-              <!--With Sub Menu
-               <a  class="dopdown-toggle" data-toggle='dropdown'>
-                namesubmenu
+              <!--With Sub Menu-->
+              <a *ngIf="menu.name == 'Admin'" class="dopdown-toggle" data-toggle='dropdown'>
+                {{menu.name}}
                 <i class="ion-arrow-down-b"></i>
               </a>
-              <ul class="dropdown-menu multi-level">
-                <li class="pointer dropdown-submenu" >
-                  <a  href=''>
-                    submenu1.name
+              <ul class="dropdown-menu multi-level aling">
+                <li *ngFor="let submenu of (menuList | sort:'order')" class="pointer dropdown-submenu">
+                  <a *ngIf="submenu.idParent != 0" routerLink='{{submenu.link}}' (click)="changeRoute(submenu.link)">
+                    {{submenu.name}}
                   </a>
-                  With Sub Menu
-                  <a  class="dopdown-toggle" data-toggle='dropdown'>
-                    submenu1.name
-                    <i class="ion-arrow-down-b"></i>
-                  </a>
-                  <ul class="dropdown-menu multi-level">
-                    <li class="pointer" >
-                      <a href="">subMenu2.name</a>
-                    </li>
-                  </ul>
+                  <!-- <ul class="dropdown-menu multi-level">
+                            <li class="pointer" >
+                              <a href="">subMenu2</a>
+                            </li>
+                          </ul> -->
                 </li>
-              </ul>-->
+              </ul>
             </li>
           </ul>
         </div>

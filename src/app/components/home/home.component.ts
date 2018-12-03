@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
   applicationconfig = { version: Constants.Version, application: Constants.application, applicationPath: Constants.applicationPath, logo: Constants.logo, ico: Constants.ico, plant: Constants.plant }
   public subscriptions: Subscription[] = [];
   user: User;
-  plant: any;
   menu: GeneralResponse;
   menuList = []
   currentYear;
@@ -37,16 +36,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("currentUser"));
     console.log(this.user);
-    const subsciptionPlantinfo =  this.homeService.getPlantInfo({ user: this.user.username, application: this.applicationconfig.application}).subscribe(res => {
-      this.charging.show();
-      this.plant = res;    
-      console.log(res);
-      
-    }, error => {
-      console.log(error);
-      }, () => {
-
-        this.subscriptions.push(subsciptionPlantinfo);
         const subsciptionMenu = this.homeService.getMenuInfo({ user: this.user.username, application: this.applicationconfig.application, plant: Constants.plant }).subscribe(res => {
           this.menu = res;
           for (var i = 0; i < this.menu.data.menu.length; i++) {
@@ -59,7 +48,6 @@ export class HomeComponent implements OnInit {
         });  
 
         this.subscriptions.push(subsciptionMenu);   
-      });
       
     var message = localStorage.getItem("message");
     let date = new Date();

@@ -16,8 +16,6 @@ export class LoginService {
   }
 
   getUserInfo(data: any): Observable<GeneralResponse> {
-    return this.http.get<GeneralResponse>(LoginService.ENDPOINT_GET_USER_INFO, { params: data }).pipe(map(
-      response => response
-    ));
+    return this.http.get<GeneralResponse>(LoginService.ENDPOINT_GET_USER_INFO, { params: data }).pipe();
   }
 }

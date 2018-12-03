@@ -7,10 +7,12 @@ import { HomeRoutingModule } from './home-routing';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HomeService } from './home.service';
+import { ArraySortPipe } from 'src/app/helpers/pipes/orderMenu';
 
 @NgModule({
     declarations: [
-        HomeComponent
+        HomeComponent,
+        ArraySortPipe
     ],
     imports: [
         CommonModule,

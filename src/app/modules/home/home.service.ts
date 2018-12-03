@@ -10,21 +10,12 @@ import { GeneralResponse } from '../../models/home/home.model';
   providedIn: 'root'
 })
 export class HomeService {
-  static ENDPOINT_GET_USER_MENU = Constants.SERVER + "Get/User/Plant/Menu";
-  static ENDPOINT_GET_USER_PLANT = Constants.SERVER + "Get/User/Plant/";
+  static ENDPOINT_GET_USER_MENU = Constants.SERVER + "Get/User/Menu/";
   constructor(private http: HttpClient) {
   
    }
 
   getMenuInfo(data: any): Observable<GeneralResponse> {
-    return this.http.get<GeneralResponse>(HomeService.ENDPOINT_GET_USER_MENU, { params: data }).pipe(map(
-      response => response
-    ));
-  }
-
-  getPlantInfo(data: any): Observable<GeneralResponse> {
-    return this.http.get<GeneralResponse>(HomeService.ENDPOINT_GET_USER_PLANT, { params: data }).pipe(map(
-      response => response
-    ));
+    return this.http.get<GeneralResponse>(HomeService.ENDPOINT_GET_USER_MENU, { params: data }).pipe();
   }
 }

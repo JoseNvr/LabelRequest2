@@ -15,7 +15,8 @@ export function getAuthServiceConfigs() {
         [
             {
                 id: GoogleLoginProvider.PROVIDER_ID,
-                provider: new GoogleLoginProvider("750475401698-q97li2b37sm0d94750upvg5sbbkv2vd5.apps.googleusercontent.com")
+                //follow this link https://console.developers.google.com and in the project SanminaUniversal make your OAuth 2.0 client ID
+                provider: new GoogleLoginProvider("47775143219-jsvd9rl9va6c6ijadh0pgidkl8534etu.apps.googleusercontent.com") 
             },
         ]
     );

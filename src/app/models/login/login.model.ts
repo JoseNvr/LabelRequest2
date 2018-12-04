@@ -12,4 +12,5 @@ export interface User {
     name: string;
     number: number;
     username: string;
+    loginType: string;
 }

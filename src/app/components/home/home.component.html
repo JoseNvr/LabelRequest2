@@ -177,9 +177,10 @@
       </div>
       <div class="col-md-4 ">
         <form class="form">
-          <div id="NamePopover">{{user.fullName}}</div>
+          <div id="NamePopover">{{user.name}}</div>
           <div id="employeNumber">{{user.number}}</div>
-          <div class="text-gray logBy">Login By LDAP</div>
+          <div class="text-gray logBy">Login By {{user.loginType}}</div>
+          <br>
           <br>
         </form>
       </div>

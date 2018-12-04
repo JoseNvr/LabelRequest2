@@ -23,7 +23,7 @@ import { ArraySortPipe } from 'src/app/helpers/pipes/orderMenu';
 
     ],
     providers: [
-        HomeService
+        HomeService 
     ],
 
 })

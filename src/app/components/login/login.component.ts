@@ -41,7 +41,8 @@ export class LoginComponent implements OnInit {
    // $('#loadingModal').modal('show');
     this.loading.show();
     this.subscribeUser =this.LoginService.getUserInfo(this.params).subscribe(res => {
-      this.generalresponse = res;      
+      this.generalresponse = res;   
+      this.generalresponse.data.loginType = "LDAP";   
       this.user = this.generalresponse.data;
     }, error => {
 
@@ -75,6 +76,7 @@ export class LoginComponent implements OnInit {
         this.loading.show();
         this.subscribeUser = this.LoginService.getUserInfo(this.params).subscribe(res => {
           this.generalresponse = res;
+          this.generalresponse.data.loginType = "GOOGLE";
           this.user = this.generalresponse.data;
         }, error => {
           console.log(error);

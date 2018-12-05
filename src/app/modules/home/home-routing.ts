@@ -10,8 +10,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                outlet: 'mainPage',
-                canActivate: [LoginAct]
+                loadChildren: 'src/app/modules/principal/principal.module#PrincipalModule', canActivate: [LoginAct]
             },
         ]
     }

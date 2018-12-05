@@ -6,9 +6,8 @@ import { NgModule } from '@angular/core';
 
 // Define which component should be loaded based on the current URL
 export const routes: Routes = [
-    { path: 'home', loadChildren: './modules/home/home.module#HomeModule', canActivate: [LoginAct] },
-    { path: 'login', loadChildren: './modules/login/login.module#LoginModule', canActivate: [HomeAct] },
-    { path: '', redirectTo: 'home', pathMatch: 'full' }
+    { path: '', loadChildren: './modules/home/home.module#HomeModule', canActivate: [LoginAct] },
+    { path: 'login', loadChildren: './modules/login/login.module#LoginModule', canActivate: [HomeAct] }
 ];
 
 @NgModule({

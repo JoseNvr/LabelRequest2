@@ -18,12 +18,13 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit {
   @ViewChild('modalCharg') charging: ModalDirective;
-  applicationconfig = { version: Constants.Version, application: Constants.application, applicationPath: Constants.applicationPath, logo: Constants.logo, ico: Constants.ico, plant: Constants.plant }
+  public applicationconfig = { version: Constants.Version, application: Constants.application, applicationPath: Constants.applicationPath, logo: Constants.logo, ico: Constants.ico, plant: Constants.plant }
   public subscriptions: Subscription[] = [];
-  user: User;
-  menu: GeneralResponse;
-  menuList = []
-  currentYear;
+  public user: User;
+  public menu: GeneralResponse;
+  public menuList = []
+  public currentYear;
+  public currentRoute;
 
   constructor(public location: PlatformLocation,
               public router: Router,
@@ -35,14 +36,26 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("currentUser"));
-    console.log(this.user);
         const subsciptionMenu = this.homeService.getMenuInfo({ user: this.user.username, application: this.applicationconfig.application, plant: Constants.plant }).subscribe(res => {
           this.menu = res;
           for (var i = 0; i < this.menu.data.menu.length; i++) {
             this.menuList.push(this.menu.data.menu[i]);
           } 
           this.charging.hide();
-          this.notify.setNotification('Login Success', message, 'success');      
+          this.notify.setNotification('Login Success', message, 'success');
+          console.log(this.router.url);
+          
+          switch (this.router.url) {
+            case '/': {
+              this.currentRoute = 'home';
+              break;
+            }
+            case '/Prueba1link': {
+              this.currentRoute = 'prueba1';
+              break;
+            }
+          }
+      
         }, error => {
           console.log(error);
         });  
@@ -60,6 +73,18 @@ export class HomeComponent implements OnInit {
   logout(){
     localStorage.removeItem('currentUser');
     this.router.navigate(['login']);
+  }
+  changeRoute(currentRoute: string): void {
+    switch (currentRoute) {
+      case 'Home': {
+        this.currentRoute = 'home';
+        break;
+      }
+      case '/Prueba1link': {
+        this.currentRoute = 'prueba1';
+        break;
+      }
+    }
   }
 
   ngOnDestroy(): void {

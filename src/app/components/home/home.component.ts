@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PlatformLocation } from '@angular/common'
+import { PlatformLocation, Location } from '@angular/common'
 import { Router } from '@angular/router';
 import { User, GeneralResponse } from '../../models/home/home.model';
 import {Notify} from '../../modules/notify/notify';
@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
 
   constructor(public location: PlatformLocation,
               public router: Router,
+              public loc: Location,
               public homeService: HomeService,
               public notify: Notify) {
    }
@@ -85,6 +86,24 @@ export class HomeComponent implements OnInit {
         break;
       }
     }
+  }
+
+  back(): void {
+    this.loc.back();
+    setTimeout(() => {
+      switch (this.router.url) {
+        case '/': {
+          this.currentRoute = 'home';
+          break;
+        }
+        case '/Prueba1link': {
+          this.currentRoute = 'prueba1';
+          break;
+        }
+      }
+
+    }, 100);
+
   }
 
   ngOnDestroy(): void {

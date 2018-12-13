@@ -3,7 +3,7 @@ export class Constants {
 
     public static PRODUCTION: boolean = !window.location.toString().includes('localhost');
 
-    public static SERVER: string = Constants.PRODUCTION ? '/SpringbootBasicTemplate/' : 'http://127.0.0.1:8080/SpringbootBasicTemplate/';
+    public static SERVER: string = Constants.PRODUCTION ? '/GettingStarted/' : 'http://127.0.0.1:8080/GettingStarted/';
 
     public static Version: String = "1.0";
 

@@ -1,110 +1,154 @@
-<form class="form-horizontal card">
-  <h3>Template example</h3>
-  <div class="form-group ">
-    <div class="col-sm-4">
-      <label class="control-label" for="sn">Serial Number:</label>
-      <input class="form-control" (keypress)="eventHandler($event)" [(ngModel)]="serial_number"
-        placeholder="1234567" name="serial" #serial="ngModel" oninput="this.value = this.value.toUpperCase()" id="sn"
-        type="text" placeholder="wirte something for unlock the button">
-    </div>
+<main role="main" class="container">
 
-    <div class="col-sm-4">
-      <label class="control-label" for="pn">Part Number:</label>
-      <input class="form-control" oninput="this.value = this.value.toUpperCase()" id="pn" type="text" placeholder="PN123456"
-        value="{{part_number}}" disabled>
-    </div>
-    <div class="col-sm-4">
-      <label class="control-label" for="cr">Current Revision:</label>
-      <input class="form-control" id="rs" type="text" placeholder="" value="{{currentRev}}" disabled>
+  <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
+    <img class="mr-3" src="https://cdn4.iconfinder.com/data/icons/seo-internet/512/19-512.png" alt="" width="70"
+      height="70">
+    <div class="lh-100">
+      <h1 class="mb-0 header-text lh-100">Template example</h1>
+      <small class="header-text lh-100">RIL (Rapid Innovation Lab)</small>
     </div>
   </div>
 
-  <div class="form-group ">
-    <div class="col-sm-4">
-      <label class="control-label" for="rs">New Revision:</label>
-      <select class="form-control" [(ngModel)]="revision" (change)="eventHandler($event)" name="optionTop"
-        id="sel1">
-        <option *ngFor="let Revlist of RevList" [ngValue]="Revlist">{{Revlist}}</option>
-      </select>
-    </div>
-
-    <div class="col-sm-4">
-      <label class="control-label">Reference:</label>
-      <textarea class="form-control" type="text" [(ngModel)]="reference1" name="reference"
-        #reference="ngModel" oninput="this.value = this.value.toUpperCase()" placeholder="Para cada referencia da un enter"></textarea>
-    </div>
-
-      <div class="col-sm-4">
-        <br>
-        <button type="button" class="btn btn-success form-control" [disabled]="serial_number === '' || serial_number === undefined"
-          (click)="modalConfirm.show()">
-          Send New Revision <i class="fa fa-check-circle"></i></button>
+  <div class="my-3 p-3 bg-white rounded shadow-sm card--z-5">
+    <form class="form-horizontal">
+      <div class="form-group ">
+        <div class="col-sm-4">
+          <label class="control-label" for="sn">Serial Number:</label>
+          <input class="form-control" (keypress)="eventHandler($event)" [(ngModel)]="serial_number"
+            placeholder="1234567" name="serial" #serial="ngModel" oninput="this.value = this.value.toUpperCase()"
+            id="sn" type="text" placeholder="wirte something for unlock the button">
+        </div>
       </div>
+      <div class="form-group ">
+        <div class="col-sm-4">
+          <label class="control-label" for="pn">Part Number:</label>
+          <input class="form-control" oninput="this.value = this.value.toUpperCase()" id="pn" type="text"
+            placeholder="PN123456" value="{{part_number}}" disabled>
+        </div>
+      </div>
+      <div class="form-group ">
+        <div class="col-sm-4">
+          <label class="control-label" for="cr">Current Revision:</label>
+          <input class="form-control" id="rs" type="text" placeholder=""
+
+          disabled>
+        </div>
+      </div>
+      <div class="form-group ">
+        <div class="col-sm-4">
+          <label class="control-label" for="rs">Select Revision</label>
+          <div class="dropdown">
+            <button class="btn btn-outline-down-sanmina-danger dropdown-toggle" type="button" id="dropdownMenu2"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <!-- New Revision: {{revSelected.revision}} -->
+            </button>
+            <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <button *ngFor="let rev of revList" class="dropdown-item-sanmina-danger" type="button"
+                (click)="selectRev(rev)"
+                >
+                <span>{{rev.revision}}</span></button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="form-group ">
+        <div class="col-sm-4">
+          <label class="control-label">Reference:</label>
+          <textarea class="form-control" type="text" [(ngModel)]="reference1" name="reference" #reference="ngModel"
+            oninput="this.value = this.value.toUpperCase()" placeholder="Para cada referencia da un enter"></textarea>
+        </div>
+      </div>
+      <div class="form-group ">
+        <div class="col-sm-4">
+          <br>
+          <button type="button" class="btn btn-outline-down-sanmina-success form-control"
+            (click)="modalConfirm.show()">
+            Send New Revision <i class="fa fa-check-circle"></i></button>
+        </div>
+      </div>
+
+      <div class="form-group ">
+        <table class="table table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+
+
+
+    <!-- Modals -->
+    <!-- Charging Modal -->
+    <div class="loadingmodal">
+      <div bsModal #modalCharg='bs-modal' class="modal uppercase" tabindex="-1" role="dialog"
+        aria-labelledby="LoadingModal" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="modalCharg.hide()"><span class="ion-close-round"></span></button>
+              <h4 class="modal-title" id="mySmallModalLabel">Please Wait... <i class="ion-loading"></i></h4>
+            </div>
+            <div class="modal-body">
+              Getting information...
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div class="loadingmodal">
+      <div bsModal #modalConfirm='bs-modal' class="modal fade uppercase" tabindex="-1" role="dialog"
+        aria-labelledby="ConfirmModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="width: 500px">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="modalConfirm.hide()"><span class="ion-close-round"></span></button>
+              <h2 class="modal-title text-center text-uppercase font-weight-bold" id="titleAction">¿seguro que deseas
+                enviar esta información?</h2>
+            </div>
+            <div id="messageAction" class="modal-body">
+              Porfavor verifica que la informacion sea correcta
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-down-sanmina-primary" data-dismiss="modal"
+                (click)="modalConfirm.hide()">Close</button>
+
+              <button type="button" id="saveConfirmButton" class="btn btn-outline-down-sanmina-danger"
+               ><i class="ion-checkmark-round"></i>
+                Send </button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+    </div>
   </div>
-
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Serial Number</th>
-        <th>Part Number</th>
-        <th>Current Revision</th>
-        <th>Class</th>
-        <th>Clei</th>
-        <th>ECI</th>
-        <th>New Revision</th>
-        <th>Select</th>
-      </tr>
-    </thead>
-    <tbody>
-  
-    </tbody>
-  </table>
-
-</form>
-
-
-
-<!-- Modals -->
-<!-- Charging Modal -->
-<div class="loadingmodal">
-  <div bsModal #modalCharg='bs-modal' class="modal uppercase" tabindex="-1" role="dialog" aria-labelledby="LoadingModal"
-    aria-hidden="true">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="modalCharg.hide()"><span
-              class="ion-close-round"></span></button>
-          <h4 class="modal-title" id="mySmallModalLabel">Please Wait... <i class="ion-loading"></i></h4>
-        </div>
-        <div class="modal-body">
-          Getting information...
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div>
-</div>
-
-<!-- Confirm Modal -->
-<div class="loadingmodal">
-  <div bsModal #modalConfirm='bs-modal' class="modal fade uppercase" tabindex="-1" role="dialog" aria-labelledby="ConfirmModal"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="width: 500px">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="modalConfirm.hide()"><span
-              class="ion-close-round"></span></button>
-          <h4 class="modal-title" id="titleAction">¿seguro que deseas enviar esta información?</h4>
-        </div>
-        <div id="messageAction" class="modal-body">
-          Porfavor verifica que la informacion sea correcta
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalConfirm.hide()">Close</button>
-
-          <button type="button" id="saveConfirmButton" class="btn btn-success" (click)="sendNewRevision()"><i class="ion-checkmark-round"></i>
-            Send </button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div>
-</div>
+</main>

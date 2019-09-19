@@ -42,7 +42,6 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log("Test");
     const message = localStorage.getItem("message");
     const date = new Date();
     this.generalResponse = JSON.parse(
@@ -54,7 +53,6 @@ export class HomeComponent implements OnInit {
     }
     this.charging.hide();
     this.notify.setNotification("Login Success", message, "success");
-    console.log(this.router.url);
     switch (this.router.url) {
       case "/": {
         this.currentRoute = "home";

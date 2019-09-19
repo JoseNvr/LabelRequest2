@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from '../../components/home/home.component';
-import { LoginAct } from '../../loginblock.service';
+import { LoginAct } from '../../loginact.service';
 
 
 const routes: Routes = [

@@ -4,11 +4,13 @@ import { AuthService, GoogleLoginProvider } from "angular-6-social-login";
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { Subscription } from "rxjs";
 import { Constants } from "../../helpers/constats";
-import { GeneralResponse, User,LoginResponse } from "../../models/login/login.model";
+import {
+  GeneralResponse,
+  User,
+  LoginResponse
+} from "../../models/login/login.model";
 import { LoginService } from "../../modules/login/login.service";
 import { Notify } from "../../modules/notify/notify";
-
-
 
 declare var $: any;
 
@@ -22,7 +24,8 @@ export class LoginComponent implements OnInit {
   private generalresponse: GeneralResponse;
   private loginResponse: LoginResponse;
   private subscribeUser: Subscription;
-  params: { user?: string; password?: string; application?: string } = {
+  public user: User;
+  public params: { user?: string; password?: string; application?: string } = {
     application: "TaskIT2.0"
   };
   applicationconfig = {
@@ -34,7 +37,6 @@ export class LoginComponent implements OnInit {
     localStorage: Constants.localStorage
   };
   loadingMessage = "We are getting your information for Google please wait...";
-  user: User;
 
   constructor(
     public loginService: LoginService,
@@ -54,11 +56,9 @@ export class LoginComponent implements OnInit {
         this.generalresponse = res;
         this.loginResponse = this.generalresponse.data;
         this.loginResponse.loginType = "LDAP";
-        console.log(this.loginResponse);
         this.user = this.loginResponse.userInfo;
       },
       error => {
-        console.log(error);
         this.loading.hide();
         this.notify.setNotification("Error", "Ingrese un usuario", "error");
       },
@@ -95,15 +95,12 @@ export class LoginComponent implements OnInit {
         this.loading.show();
         this.subscribeUser = this.loginService.getUserInfo(userDate).subscribe(
           res => {
-             this.generalresponse = res;
-             this.loginResponse = this.generalresponse.data;
-             this.loginResponse.loginType = "Google";
-             console.log(this.loginResponse);
-             this.user = this.loginResponse.userInfo;
-             console.log(this.user);
+            this.generalresponse = res;
+            this.loginResponse = this.generalresponse.data;
+            this.loginResponse.loginType = "Google";
+            this.user = this.loginResponse.userInfo;
           },
           error => {
-            console.log(error);
             this.loading.hide();
             this.notify.setNotification(
               "Error",
@@ -130,9 +127,7 @@ export class LoginComponent implements OnInit {
           }
         );
       },
-      error => {
-        console.log(error);
-      }
+      error => {}
     );
   }
   ngOnDestroy(): void {

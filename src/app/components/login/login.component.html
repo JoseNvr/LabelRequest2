@@ -1,89 +1,101 @@
-<div class='container'>
-  <div class='col-sm-8 col-sm-offset-2  mtop-10'>
-    <div class="row">
-      <div class="col-xs-6">
-        <h3 class="mtop-40 mbottom-5">Welcome {{applicationconfig.name}}</h3>
-      </div>
-      <div class="col-xs-6">
-        <img src="assets/sanmina/sanmina-100x56.png" class="pull-right">
-      </div>
-    </div>
-    <div class="row panel panel-default">
-      <div class="col-xs-12 bg-gray-darker">
-        <img src="assets/sanmina/secure-access-header.png" class="mtop-20 img-responsive center-block">
-      </div>
-      <form class="form col-xs-12">
-        <div class="clearfix">
-          <div class="col-lg-6 col-md-5 mtop-15 clearfix">
-
-            <div class="row">
-              <div class="col-md-12 form-group">
-                <label>Usuario Universal</label>
-                <input class="form-control" type="text" oninput="this.value = this.value.toUpperCase()" [(ngModel)]="params.user" placeholder="name_lasname" name = "user" #user = "ngModel">
-              </div>
-              <div class="col-md-12 form-group">
-                <label>Password</label>
-                <input class="form-control" type="password" [(ngModel)]="params.password" placeholder="***********" name = "password" #password = "ngModel">
-              </div>
-              <div class="col-md-12">
-                <a class="btn btn-danger btn-lg btn-loading col-sm-12 col-xs-12 mtop-5" (click)="singin()" >
-                  <span class="content">Entrar</span>
-                </a>
-                <!-- <button  class="btn btn-danger btn-lg btn-loading col-sm-12 col-xs-12 mtop-5" (click)= "singin()">
-                  <span class="content">Entrar</span>
-                </button> -->
-              </div>
-            </div>
-            <div  class="row">
-              <div class="col-md-12 mtop-50">
-                <a  id="googleButton" class="btn btn-primary btn-block mtop-50"(click)="singinwhitgoogle()">
-                  <span class="content"><i class="fa fa-google"></i> Cuenta de Google</span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-7 mtop-10 mbottom-10">
-            <div class="clearfix well well-info">
-              <div class="col-xs-12">
-                <h5 class="text-center">SANMINA CORPORATION ELECTRONIC<br/> WORKSPACE LEGAL NOTICE
-                  </h5>
-                  <p class="text-smaller">
-                    This is a Sanmina Corporation electronic workspace. This system is provided for the business use of Sanmina and its Partners,
-                    including customers and suppliers. All information, including personal information, placed on or sent
-                    over this system may be monitored, examined, recorded, and/or copied, subject to the terms of any Non-Disclosure
-                    Agreement that may exist between Sanmina and its Partners. This system is also governed by all applicable
-                    federal, state and local laws, including U.S. export laws. Accordingly, you may not place or send any
-                    information over this system that violates any of those laws or infringes on the rights of any third
-                    party. For example, information known to fall under the requirements of the International Traffic in
-                    Arms Regulations (ITAR) or Export Administration Regulations (EAR) should not be placed on or sent over
-                    this system. Unauthorized use or access to this system is strictly prohibited and may be subject to legal
-                    action. Complete terms and conditions of use are available <a href="//www.sanmina.com/company-profile/legal-information/index.php"
-                      target="_blank">here</a>. By use of this system, the user consents to the terms of this Notice.
-                  </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- Modals -->
-<!-- Confirm Modal -->
 <div class="loadingmodal">
-  <div bsModal #LoadingModal='bs-modal' class="modal uppercase" tabindex="-1" role="dialog" aria-labelledby="LoadingModal"
-    aria-hidden="true">
+  <div bsModal #LoadingModal='bs-modal' class="modal uppercase" tabindex="-1" role="dialog"
+    aria-labelledby="LoadingModal" aria-hidden="true">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="ion-close-round"></span></button>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+              class="ion-close-round"></span></button>
           <h4 class="modal-title" id="mySmallModalLabel">Please Wait... <i class="ion-loading"></i></h4>
         </div>
         <div class="modal-body">
           {{loadingMessage}}
         </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+      </div>
+    </div>
   </div>
 </div>
+
+
+
+
+<main role="main" class="container">
+  <div class="col-md-auto mtop-10">
+
+    <div class="row ">
+      <div class="col-md-auto mx-auto mt-5">
+        <h3 class="mtop-40 ng-binding float-left text-muted">Welcome {{applicationconfig.name}}</h3>
+      </div>
+      <div class="col-md-auto mx-auto mt-5">
+        <img src="assets/sanmina/sanmina-100x56.png" class="float-right">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 mx-auto shadow-lg p-4 mb-5 bg-white rounded op-4">
+        <div class="col-xs-12 bg-secondary">
+          <img class="mtop-20 img-responsive center-block" src="assets/sanmina/secure-access-header.png">
+        </div>
+        <div class="row">
+          <!-- Login Side -->
+          <div class="col-md-6">
+            <div class="row">
+              <form #Form="ngForm" class="mt-2 p-3 form-signin text-center">
+                <!-- <h1 class="styles-test mt-5">Applications Manager</h1> -->
+                <!-- <h1 class="lead mt-3 mb-3">Sign in</h1> -->
+                <div id="message"><b class="ng-binding"></b></div>
+                <div class="form-group col-md-12">
+                  <label class="float-left font-weight-bold">Usuario Universal</label>
+                  <input class="float-left form-control" [(ngModel)]="params.user" placeholder="name_lasname"
+                    name="user" #user="ngModel" type="text">
+                </div>
+                <div class="form-group col-md-12">
+                  <label class="float-left font-weight-bold">Password</label>
+                  <input class="float-left form-control" [(ngModel)]="params.password" name="password"
+                    #password="ngModel" type="password" placeholder="***********">
+                </div>
+              </form>
+              <div class="col-md-12">
+                <button (click)="singin()"
+                  class="btn btn-outline-down-sanmina-danger btn-lg btn-loading btn-block mt-2">
+                  <span class="content">Entrar</span>
+                </button>
+              </div>
+              <!-- Google Button -->
+              <div class="col-md-12">
+                <button (click)="singinwhitgoogle()" id="googleBtn"
+                  class="btn btn-outline-down-sanmina-primary btn-lg btn-block mt-2">
+                  <span class="content"><i class="fab fa-google"></i> Sign In By Google</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Info Side  -->
+          <div class="col-md-6 mt-2">
+            <div class="clearfix p-3 mb-2 bg-cyan text-white">
+              <div class="col-xs-12">
+                <h4 class="text-center text-dark">SANMINA CORPORATION ELECTRONIC
+                  WORKSPACE LEGAL NOTICE</h4>
+                <small class="font-italic text-muted text-justify lh-100">
+                  This is a Sanmina Corporation electronic workspace. This system is provided for the business use of
+                  Sanmina and its Partners, including customers and suppliers. All information, including personal
+                  information, placed on or sent over this system may be monitored, examined, recorded, and/or copied,
+                  subject to the terms of any Non-Disclosure Agreement that may exist between Sanmina and its Partners.
+                  This system is also governed by all applicable federal, state and local laws, including U.S. export
+                  laws. Accordingly, you may not place or send any information over this system that violates any of
+                  those
+                  laws or infringes on the rights of any third party. For example, information known to fall under the
+                  requirements of the International Traffic in Arms Regulations (ITAR) or Export Administration
+                  Regulations (EAR) should not be placed on or sent over this system. Unauthorized use or access to this
+                  system is strictly prohibited and may be subject to legal action. Complete terms and conditions of use
+                  are available <a href="//www.sanmina.com/company-profile/legal-information/index.php"
+                    target="_blank">here</a>. By use of this system, the user consents to the terms of this Notice.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

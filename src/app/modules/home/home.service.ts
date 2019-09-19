@@ -1,21 +1,18 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Constants } from '../../helpers/constats';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { GeneralResponse } from '../../models/home/home.model';
-
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Constants } from "../../helpers/constats";
+import { GeneralResponse } from "../../models/home/home.model";
+import { LoginResponse } from "src/app/models/login/login.model";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class HomeService {
-  static ENDPOINT_GET_USER_MENU = Constants.SERVER + "Get/User/Menu/";
+  private loginResponse: LoginResponse;
   constructor(private http: HttpClient) {
-  
-   }
-
-  getMenuInfo(data: any): Observable<GeneralResponse> {
-    return this.http.get<GeneralResponse>(HomeService.ENDPOINT_GET_USER_MENU, { params: data }).pipe();
+    this.loginResponse = JSON.parse(
+      localStorage.getItem(Constants.localStorage)
+    );
   }
 }

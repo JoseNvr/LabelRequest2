@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
-import { LoginAct } from './loginblock.service';
-import { HomeAct } from './homeblock.service';
+import { LoginAct } from './loginact.service';
+import { HomeAct } from './homeact.service';
 import { NgModule } from '@angular/core';
 
 

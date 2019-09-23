@@ -8,11 +8,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HomeService } from './home.service';
 import { ArraySortPipe } from 'src/app/helpers/pipes/orderMenu';
+import { FilterMenuPipe } from 'src/app/helpers/pipes/filterMenu';
 
 @NgModule({
     declarations: [
         HomeComponent,
-        ArraySortPipe
+        ArraySortPipe,
+        FilterMenuPipe
     ],
     imports: [
         CommonModule,
@@ -23,7 +25,7 @@ import { ArraySortPipe } from 'src/app/helpers/pipes/orderMenu';
 
     ],
     providers: [
-        HomeService 
+        HomeService
     ],
 
 })

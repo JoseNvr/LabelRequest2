@@ -8,7 +8,7 @@ export interface GeneralResponse {
 export interface LoginResponse {
   success: boolean;
   message: string;
-  authToken: string;
+  token: string;
   loginType: string;
   data: any;
   userInfo: User;

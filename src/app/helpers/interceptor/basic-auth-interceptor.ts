@@ -19,16 +19,17 @@ export class BasicAuthInterceptor implements HttpInterceptor {
     this.loginResponse = JSON.parse(
       localStorage.getItem(Constants.localStorage)
     );
-    if (this.loginResponse && this.loginResponse.authToken) {
+    if (this.loginResponse && this.loginResponse.token) {
       request = request.clone({
         setHeaders: {
-          Authorization: "Bearer " + this.loginResponse.authToken,
+          Authorization: "Bearer " + this.loginResponse.token,
           "Content-Type": "application/json; charset=utf-8"
         }
       });
       console.log(request);
+    } else {
+      request = request.clone();
     }
-
     return next.handle(request);
   }
 }

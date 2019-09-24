@@ -1,9 +1,10 @@
-export interface GeneralResponse {
-  success: boolean;
-  message: string;
-  data: any;
+export interface ApplicationData {
+  menus: Array<Menu>;
+  profiles: Array<Profile>;
+  sites: Array<Site>;
   userInfo: User;
-  plants: Plants;
+  token: string;
+  loginType: string;
 }
 
 export interface User {
@@ -18,15 +19,26 @@ export interface User {
 }
 
 export interface Menu {
+  active: boolean;
+  description: string;
+  idFatherMenu: number;
+  idMenu: number;
   link: string;
+  name: string;
+  orden: number;
+}
+
+export interface Site {
+  active: boolean;
+  alias: string;
+  codeSite: string;
+  idSite: number;
   name: string;
 }
 
-export interface Plants {
-  plants: Array<Plant>;
-}
-
-export interface Plant {
-  idPlant: number;
-  plant: string;
+export interface Profile {
+  active: boolean;
+  description: string;
+  idProfile: number;
+  name: string;
 }

@@ -25,12 +25,12 @@ export class LoginComponent implements OnInit {
   private loginResponse: LoginResponse;
   private subscribeUser: Subscription;
   public user: User;
-  public params: { user?: string; password?: string; application?: string } = {
-    application: "TaskIT2.0"
+  public params: { user?: string; password?: string; application?: String } = {
+    application: Constants.application
   };
   applicationconfig = {
-    name: Constants.application + " " + Constants.Version,
-    application: Constants.application,
+    name: Constants.applicationName + " " + Constants.Version,
+    application: Constants.applicationName,
     applicationPath: Constants.applicationPath,
     logo: Constants.logo,
     ico: Constants.ico,

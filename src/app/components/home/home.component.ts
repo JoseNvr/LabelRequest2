@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { PlatformLocation, Location } from "@angular/common";
 import { Router } from "@angular/router";
-import { User, GeneralResponse } from "../../models/home/home.model";
+import { User, ApplicationData } from "../../models/home/home.model";
 import { Notify } from "../../modules/notify/notify";
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { HomeService } from "../../modules/home/home.service";
@@ -28,8 +28,8 @@ export class HomeComponent implements OnInit {
   };
   public subscriptions: Subscription[] = [];
   public user: User;
-  public generalResponse: GeneralResponse;
-  public menuList = [];
+  public applicationData: ApplicationData;
+  // public menuList = [];
   public currentYear;
   public currentRoute;
 
@@ -44,13 +44,13 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     const message = localStorage.getItem("message");
     const date = new Date();
-    this.generalResponse = JSON.parse(
+    this.applicationData = JSON.parse(
       localStorage.getItem(Constants.localStorage)
     );
-    this.user = this.generalResponse.userInfo;
-    for (let i = 0; i < this.generalResponse.data.menu.length; i++) {
-      this.menuList.push(this.generalResponse.data.menu[i]);
-    }
+    this.user = this.applicationData.userInfo;
+    // for (let i = 0; i < this.applicationData.menus.length; i++) {
+    //   this.menuList.push(this.applicationData.menus[i]);
+    // }
     this.charging.hide();
     this.notify.setNotification("Login Success", message, "success");
     switch (this.router.url) {

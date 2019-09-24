@@ -18,30 +18,32 @@
       <ul class="nav navbar-nav">
         <!--Without submenu-->
         <li *ngFor="let menu of (applicationData.menus | sort:'orden' |filterMenu:0 )" class="pointer">
-          <a class="nav-link" *ngIf="menu.name != 'Manual' && menu.name == 'Home'" routerLink='{{menu.link}}'
-            (click)="changeRoute(menu.name)"><i class="fa fa-home"></i></a>
-          <a class="nav-link"
-            *ngIf="menu.name != 'Manual' && menu.name != 'Home' && menu.name != 'Admin'"
+          <a class="nav-link" *ngIf="(applicationData.menus |filterMenu:menu.idMenu).length == 0"
+            routerLink='{{menu.link}}' (click)="changeRoute(menu.name)">
+            <i ng-if="menu.name == 'Home'" class="fas fa-home"></i>
+            <span ng-if="menu.name != 'Home'" class="uppercase">{{menu.name}}</span>
+          </a>
+          <!-- --
+          {{menu.idMenu}}
+          --          {{(applicationData.menus |filterMenu:menu.idMenu).length}}
+          -- -->
+          <!-- <a class="nav-link" *ngIf="menu.name != 'Manual' && menu.name != 'Home' && menu.name != 'Admin'"
             routerLink='{{menu.link}}' (click)="changeRoute(menu.name)">{{menu.name}}</a>
-          <a class="nav-link" *ngIf="menu.name === 'Manual'" target="_blank" href='{{menu.link}}'>{{menu.name}}</a>
+          <a class="nav-link" *ngIf="menu.name === 'Manual'" target="_blank" href='{{menu.link}}'>{{menu.name}}</a> -->
           <!--With Sub Menu-->
-          <a class="nav-link" *ngIf="menu.name == 'Admin'" class="dopdown-toggle" data-toggle='dropdown'>
+          <!-- <a class="nav-link" *ngIf="menu.name == 'Admin'" class="dopdown-toggle" data-toggle='dropdown'>
             {{menu.name}}
             <i class="ion-arrow-down-b"></i>
-          </a>
-          <ul class="dropdown-menu multi-level aling">
+          </a> -->
+          <!-- <ul class="dropdown-menu multi-level aling">
             <li *ngFor="let submenu of (applicationData.menus | sort:'orden')" class="pointer dropdown-submenu">
               <a class="nav-link" routerLink='{{submenu.link}}'
                 (click)="changeRoute(submenu.link)">
                 {{submenu.name}}
               </a>
-              <!-- <ul class="dropdown-menu multi-level">
-                            <li class="pointer" >
-                              <a href="">subMenu2</a>
-                            </li>
-                          </ul> -->
+
             </li>
-          </ul>
+          </ul> -->
         </li>
       </ul>
 

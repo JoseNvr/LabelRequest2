@@ -1,9 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { Constants } from "../../helpers/constats";
-import { GeneralResponse } from "../../models/home/home.model";
 import { LoginResponse } from "src/app/models/login/login.model";
+import { Constants } from "../../helpers/constats";
 
 @Injectable({
   providedIn: "root"

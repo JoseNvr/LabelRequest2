@@ -27,8 +27,9 @@ export class BasicAuthInterceptor implements HttpInterceptor {
         }
       });
       console.log(request);
+    } else {
+      request = request.clone();
     }
-
     return next.handle(request);
   }
 }

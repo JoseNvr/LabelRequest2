@@ -48,11 +48,15 @@ export class HomeComponent implements OnInit {
       localStorage.getItem(Constants.localStorage)
     );
     this.user = this.applicationData.userInfo;
+    console.log(this.applicationData.menus);
+    
     // for (let i = 0; i < this.applicationData.menus.length; i++) {
     //   this.menuList.push(this.applicationData.menus[i]);
     // }
+    console.log(this.applicationData.menus);
+    
     this.charging.hide();
-    this.notify.setNotification("Login Success", message, "success");
+    // this.notify.setNotification("Login Success", message, "success");
     switch (this.router.url) {
       case "/": {
         this.currentRoute = "home";
@@ -64,6 +68,19 @@ export class HomeComponent implements OnInit {
       }
     }
     this.currentYear = date.getFullYear();
+    $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+	  if (!$(this).next().hasClass('show')) {
+		$(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+	  }
+	  var $subMenu = $(this).next(".dropdown-menu");
+	  $subMenu.toggleClass('show');
+
+	  $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+		$('.dropdown-submenu .show').removeClass("show");
+	  });
+
+	  return false;
+	});
   }
 
   logout() {

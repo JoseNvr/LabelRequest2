@@ -1,245 +1,247 @@
 <!-- !Primary nav bar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light pr-0 pt-0 pb-0 pl-0" id="primaryNavbar" role="navigation">
-  <!-- Brand and toggle get grouped for better mobile display -->
-  <a class="navbar-brand justify-content-center" href="#">
-    <img alt="" src="{{ applicationconfig.logo }}" class="d-flex justify-content-end mtop-5 imgIcon"
-      triggers="mouseenter:mouseleave" [popover]="popAplication" popoverTitle="Application information"
-      placement="right bottom">
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <a class="navbar-brand justify-content-center" href="#">
+        <img alt="" src="{{ applicationconfig.logo }}" class="d-flex justify-content-end mtop-5 imgIcon" triggers="mouseenter:mouseleave" [popover]="popAplication" popoverTitle="Application information" placement="right bottom">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <div class="mr-auto">
-    </div>
-    <form class="form-inline my-2 my-lg-0">
-      <ul class="nav navbar-nav">
-        <!--Without submenu-->
-        <li *ngFor="let menu of (applicationData.menus | sort:'orden' |filterMenu:0 )" class="pointer">
-          <a class="nav-link" *ngIf="(applicationData.menus |filterMenu:menu.idMenu).length == 0"
-            routerLink='{{menu.link}}' (click)="changeRoute(menu.name)">
-            <i ng-if="menu.name == 'Home'" class="fas fa-home"></i>
-            <span ng-if="menu.name != 'Home'" class="uppercase">{{menu.name}}</span>
-          </a>
-          <!-- --
-          {{menu.idMenu}}
-          --          {{(applicationData.menus |filterMenu:menu.idMenu).length}}
-          -- -->
-          <!-- <a class="nav-link" *ngIf="menu.name != 'Manual' && menu.name != 'Home' && menu.name != 'Admin'"
-            routerLink='{{menu.link}}' (click)="changeRoute(menu.name)">{{menu.name}}</a>
-          <a class="nav-link" *ngIf="menu.name === 'Manual'" target="_blank" href='{{menu.link}}'>{{menu.name}}</a> -->
-          <!--With Sub Menu-->
-          <!-- <a class="nav-link" *ngIf="menu.name == 'Admin'" class="dopdown-toggle" data-toggle='dropdown'>
-            {{menu.name}}
-            <i class="ion-arrow-down-b"></i>
-          </a> -->
-          <!-- <ul class="dropdown-menu multi-level aling">
-            <li *ngFor="let submenu of (applicationData.menus | sort:'orden')" class="pointer dropdown-submenu">
-              <a class="nav-link" routerLink='{{submenu.link}}'
-                (click)="changeRoute(submenu.link)">
-                {{submenu.name}}
-              </a>
-
-            </li>
-          </ul> -->
-        </li>
-      </ul>
-
-      <!-- <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#"><small class="text-secondary"><i class="fas fa-home"></i></small></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"><small class="text-secondary">Link 1</small></a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <small class="text-secondary">Link 2</small>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item-sanmina-danger" href="#"><small class="text-secondary">Action</small></a>
-            <a class="dropdown-item-sanmina-danger" href="#"><small class="text-secondary">Another action</small></a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item-sanmina-danger" href="#"><small class="text-secondary">Something else
-                here</small></a>
-          </div>
-        </li>
-      </ul> -->
-      <div class="justify-content-start mr-1">
-        <div id="profilePopOver">
-          <img [src]="'http://plant8.sanmina.com:8080/SanmAPI/getImageUser/?employee='+user.username"
-            alt="User profile picture" width="40" height="40" class="rounded-circle mr-2"
-            triggers="mouseenter:mouseleave" [popover]="popUser" popoverTitle="User information" placement="bottom">
-          <small class="text-bold text-secondary uppercase">
-            {{user.username| uppercase}}</small>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="mr-auto">
         </div>
-      </div>
-      <div class="float-right">
-        <a class="btn btn-white rounded-circle border" (click)="logout()">
-          <span><i class="fas fa-power-off"></i></span>
-        </a>
-      </div>
-    </form>
-  </div>
+        <form class="form-inline my-2 my-lg-0">
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active dropdown" *ngFor="let menu of (applicationData.menus | sort:'orden' |filterMenu:0 )">
+                    <a class="nav-link" href="#" *ngIf="(applicationData.menus |filterMenu:menu.idMenu).length == 0">
+                        <i *ngIf="menu.name == 'Home'" class="fas fa-home"></i>
+                        <span *ngIf="menu.name != 'Home'" class="text-uppercase">{{menu.name}}</span>
+                    </a>
+                    <a class="nav-link dropdown-toggle text-uppercase" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="(applicationData.menus |filterMenu:menu.idMenu).length > 0">{{menu.name}}</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="dropdown" *ngFor="let submenu of (applicationData.menus | sort:'orden' |filterMenu:menu.idMenu)">
+                            <a class="nav-link text-uppercase" href="#" *ngIf="(applicationData.menus |filterMenu:submenu.idMenu).length == 0">{{submenu.name}}</a>
+                            <a class="nav-link text-uppercase dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="(applicationData.menus |filterMenu:submenu.idMenu).length > 0">{{submenu.name}}</a>
+                            <ul class="dropdown-submenu" aria-labelledby="navbarDropdown">
+                                <li *ngFor="let submenu1 of (applicationData.menus | sort:'orden' |filterMenu:submenu.idMenu)">
+                                    <a class="nav-link text-uppercase" href="#">{{submenu1.name}}</a>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+
+            <!-- <ul class="navbar-nav mr-auto">
+                <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown2</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown3</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </li>
+                <li><a href="#">Service</a></li>
+            </ul> -->
+
+            <div class="justify-content-start mr-1 ">
+                <div id="profilePopOver ">
+                    <img [src]=" 'http://plant8.sanmina.com:8080/SanmAPI/getImageUser/?employee='+user.username " alt="User profile picture " width="40 " height="40 " class="rounded-circle mr-2 " triggers="mouseenter:mouseleave " [popover]="popUser
+                                " popoverTitle="User information " placement="bottom ">
+                    <small class="text-bold text-secondary uppercase ">
+            {{user.username| uppercase}}</small>
+                </div>
+            </div>
+            <div class="float-right ">
+                <a class="btn btn-white rounded-circle border " (click)="logout() ">
+                    <span><i class="fas fa-power-off "></i></span>
+                </a>
+            </div>
+        </form>
+    </div>
 </nav>
-<nav class="navbar navbar-dark bg-dark w-100 p-3" style="box-shadow: 1px 5px 12px grey; height: 33px;">
-  <div class="col-md-1 float-left">
-    <a class="navbar-brand float-left" style="margin-top: -23px; margin-left: -30px;">
-      <button class="btn btn-secondary btn-sm" (click)="back()">
-        <span><i class="fas fa-arrow-left text-bigger"></i></span>
+<nav class="navbar navbar-dark bg-dark w-100 p-3 " style="box-shadow: 1px 5px 12px grey; height: 33px; ">
+    <div class="col-md-1 float-left ">
+        <a class="navbar-brand float-left " style="margin-top: -23px; margin-left: -30px; ">
+            <button class="btn btn-secondary btn-sm " (click)="back() ">
+        <span><i class="fas fa-arrow-left text-bigger "></i></span>
       </button>
-    </a>
-    <a class="float-left" style="margin-top: -13px">
-      <small class="text-uppercase font-weight-bold text-white">
+        </a>
+        <a class="float-left " style="margin-top: -13px ">
+            <small class="text-uppercase font-weight-bold text-white ">
         {{currentRoute}}
       </small>
-    </a>
-  </div>
+        </a>
+    </div>
 
-  <div class="col-md-1 float-right">
+    <div class="col-md-1 float-right ">
 
-    <a class="nav-link dropdown-toggle float-right text-white" id="navbarDropdown" role="button" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false" style="margin-top: -18px">
-      <small class="text-uppercase font-weight-bold text-white">
+        <a class="nav-link dropdown-toggle float-right text-white " id="navbarDropdown " role="button " data-toggle="dropdown " aria-haspopup="true " aria-expanded="false " style="margin-top: -18px ">
+            <small class="text-uppercase font-weight-bold text-white ">
         {{applicationconfig.plant}}
       </small>
-    </a>
-    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item-sanmina-danger"><small class="text-secondary">PLANTA 2</small></a>
-      <a class="dropdown-item-sanmina-danger"><small class="text-secondary">REGIONAL IMS</small></a>
+        </a>
+        <div class="dropdown-menu " aria-labelledby="navbarDropdown ">
+            <a class="dropdown-item-sanmina-danger "><small class="text-secondary ">PLANTA 2</small></a>
+            <a class="dropdown-item-sanmina-danger "><small class="text-secondary ">REGIONAL IMS</small></a>
+        </div>
     </div>
-  </div>
 </nav>
 <!-- !Content -->
 <router-outlet></router-outlet>
 <!-- Modals -->
 <!-- Confirm Modal -->
-<div id="loadingModal" class="modal uppercase" tabindex="-1" role="dialog" aria-labelledby="LoadingModal"
-  aria-hidden="true">
-  <div class="modal-dialog modal-md">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
-            class="ion-close-round"></span></button>
-        <h4 class="modal-title" id="mySmallModalLabel">Please Wait... <i class="ion-loading"></i></h4>
-      </div>
-      <div class="modal-body">
-        loadingMessage
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
+<div id="loadingModal " class="modal uppercase " tabindex="-1 " role="dialog " aria-labelledby="LoadingModal " aria-hidden="true ">
+    <div class="modal-dialog modal-md ">
+        <div class="modal-content ">
+            <div class="modal-header ">
+                <button type="button " class="close " data-dismiss="modal " aria-hidden="true "><span
+            class="ion-close-round "></span></button>
+                <h4 class="modal-title " id="mySmallModalLabel ">Please Wait... <i class="ion-loading "></i></h4>
+            </div>
+            <div class="modal-body ">
+                loadingMessage
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
 
-<div id="selectPlant" class="modal fade uppercase" tabindex="-1" role="dialog" aria-labelledby="SelectModal"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Select a Plant</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-4 text-center">
-            <button style="height: 150px;"
-              class="btn btn-lg btn-primary btn-block mtop-30 text-center">plant.plant</button>
-          </div>
-          <div class="col-md-12 text-center">
-            <h4 class="modal-title">Setting plant and getting menus plese wait...</h4>
-          </div>
-          <div class="col-md-12 text-center">
-            <h4 class="modal-title">You don't have assigned plant, please contact IT</h4>
-          </div>
+<div id="selectPlant " class="modal fade uppercase " tabindex="-1 " role="dialog " aria-labelledby="SelectModal " aria-hidden="true ">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content ">
+            <div class="modal-header ">
+                <h4 class="modal-title ">Select a Plant</h4>
+            </div>
+            <div class="modal-body ">
+                <div class="row ">
+                    <div class="col-md-4 text-center ">
+                        <button style="height: 150px; " class="btn btn-lg btn-primary btn-block mtop-30 text-center ">plant.plant</button>
+                    </div>
+                    <div class="col-md-12 text-center ">
+                        <h4 class="modal-title ">Setting plant and getting menus plese wait...</h4>
+                    </div>
+                    <div class="col-md-12 text-center ">
+                        <h4 class="modal-title ">You don't have assigned plant, please contact IT</h4>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
 
 <div>
-  <div id="confirmModal" class="modal fade uppercase" tabindex="-1" role="dialog" aria-labelledby="ConfirmModal"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
-              class="ion-close-round"></span></button>
-          <h4 class="modal-title" id="titleAction"></h4>
-        </div>
-        <div id="messageAction" class="modal-body">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" id="saveConfirmButton" class="btn btn-success"><i class="ion-checkmark-round"></i>
+    <div id="confirmModal " class="modal fade uppercase " tabindex="-1 " role="dialog " aria-labelledby="ConfirmModal " aria-hidden="true ">
+        <div class="modal-dialog modal-lg ">
+            <div class="modal-content ">
+                <div class="modal-header ">
+                    <button type="button " class="close " data-dismiss="modal " aria-hidden="true "><span
+              class="ion-close-round "></span></button>
+                    <h4 class="modal-title " id="titleAction "></h4>
+                </div>
+                <div id="messageAction " class="modal-body ">
+                </div>
+                <div class="modal-footer ">
+                    <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                    <button type="button " id="saveConfirmButton " class="btn btn-success "><i class="ion-checkmark-round "></i>
             Save</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
         </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div>
+        <!-- /.modal-dialog -->
+    </div>
 
-  <div id="footer" class="col-md-12">
-    <div class="text-center">
-      <strong class="uppercase"><a href="http://www.sanmina.com/company-profile/legal-information/" target="_blank">
+    <div id="footer " class="col-md-12 ">
+        <div class="text-center ">
+            <strong class="uppercase "><a href="http://www.sanmina.com/company-profile/legal-information/ " target="_blank ">
           <small>
             <font><u>LEGAL
                 INFORMATION </u></font>
           </small>
         </a>
         <small>
-          <font color="red">POWERED BY:</font> MEXICO RAPID INNOVATION LAB - {{currentYear}}
+          <font color="red ">POWERED BY:</font> MEXICO RAPID INNOVATION LAB - {{currentYear}}
         </small>
-        <a href="http://www.sanmina.com/company-profile/safe-harbor-statement/"><small> <u>SAFE HARBOR
+        <a href="http://www.sanmina.com/company-profile/safe-harbor-statement/ "><small> <u>SAFE HARBOR
               STATEMENT</u></small></a>
       </strong>
-    </div>
-    <!-- <div class="col-md-offset-12" id="iconFooter">
-      <img class="img-circle" src="assets/sanmina/sanmina-100x56.png" id="bottomImg" />
+        </div>
+        <!-- <div class="col-md-offset-12 " id="iconFooter ">
+      <img class="img-circle " src="assets/sanmina/sanmina-100x56.png " id="bottomImg " />
     </div> -->
-  </div>
+    </div>
 </div>
 <!-- Modals -->
 <!-- Confirm Modal -->
-<div class="loadingmodal">
-  <div bsModal #modalCharg='bs-modal' class="modal uppercase" tabindex="-1" role="dialog" aria-labelledby="LoadingModal"
-    aria-hidden="true">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
-              class="ion-close-round"></span></button>
-          <h4 class="modal-title" id="mySmallModalLabel">Please Wait... <i class="ion-loading"></i></h4>
+<div class="loadingmodal ">
+    <div bsModal #modalCharg='bs-modal' class="modal uppercase " tabindex="-1 " role="dialog " aria-labelledby="LoadingModal " aria-hidden="true ">
+        <div class="modal-dialog modal-md ">
+            <div class="modal-content ">
+                <div class="modal-header ">
+                    <button type="button " class="close " data-dismiss="modal " aria-hidden="true "><span
+              class="ion-close-round "></span></button>
+                    <h4 class="modal-title " id="mySmallModalLabel ">Please Wait... <i class="ion-loading "></i></h4>
+                </div>
+                <div class="modal-body ">
+                    Getting user information...
+                </div>
+            </div>
+            <!-- /.modal-content -->
         </div>
-        <div class="modal-body">
-          Getting user information...
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div>
+        <!-- /.modal-dialog -->
+    </div>
 </div>
 
 <!--pop over user-->
 <ng-template #popUser>
-  <div>
-    <div class="col-md-4">
-      <img class="rounded-circle shadow" width="80" height="80"
-        [src]="'http://plant8.sanmina.com:8080/SanmAPI/getImageUser/?employee='+user.username" />
+    <div>
+        <div class="col-md-4 ">
+            <img class="rounded-circle shadow " width="80 " height="80 " [src]=" 'http://plant8.sanmina.com:8080/SanmAPI/getImageUser/?employee='+user.username " />
+        </div>
+        <div class="col-md-6 ">
+            <div id="NamePopover ">{{user.name}}</div>
+            <div id="employeNumber ">{{user.number}}</div>
+            <div class="text-secondary logBy ">Login By: Google</div>
+            <!-- {{user.loginType}} -->
+        </div>
     </div>
-    <div class="col-md-6">
-      <div id="NamePopover">{{user.name}}</div>
-      <div id="employeNumber">{{user.number}}</div>
-      <div class="text-secondary logBy">Login By: Google</div>
-      <!-- {{user.loginType}} -->
-    </div>
-  </div>
 
 </ng-template>
 <!--pop over application-->
 <ng-template #popAplication>
-  <div class="col-md-4">
-    <div id="NamePopover">{{applicationconfig.application}}</div>
-    <div id="employeNumber">v: {{applicationconfig.version}}</div>
-    <div class="text-gray"></div>
-  </div>
-</ng-template>
+    <div class="col-md-4 ">
+        <div id="NamePopover ">{{applicationconfig.application}}</div>
+        <div id="employeNumber ">v: {{applicationconfig.version}}</div>
+        <div class="text-gray "></div>
+    </div>
+</ng-template>+

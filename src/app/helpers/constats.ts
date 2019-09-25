@@ -9,7 +9,8 @@ export class Constants {
 
          public static Version: String = "1.0";
 
-         public static application: String = "SmartVisit";
+        //  public static application: String = "SmartVisit";
+         public static application: String = "BasicTemplate";
 
          public static applicationName: String = "Basic Template";
 

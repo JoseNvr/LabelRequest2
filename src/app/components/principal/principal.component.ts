@@ -29,7 +29,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
       .getTest({ test: "test_get" })
       .subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
         },
         error => {
           console.log(error);
@@ -43,7 +43,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
       .postTest({ "test": "test_post" })
       .subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
         },
         error => {
           console.log(error);

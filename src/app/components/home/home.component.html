@@ -14,67 +14,41 @@
         <form class="form-inline my-2 my-lg-0">
 
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active dropdown" *ngFor="let menu of (applicationData.menus | sort:'orden' |filterMenu:0 )">
+                <!-- Level one dropdown -->
+                <li class="nav-item dropdown" *ngFor="let menu of (applicationData.menus | sort:'orden' |filterMenu:0 )">
                     <a class="nav-link" href="#" *ngIf="(applicationData.menus |filterMenu:menu.idMenu).length == 0">
                         <i *ngIf="menu.name == 'Home'" class="fas fa-home"></i>
                         <span *ngIf="menu.name != 'Home'" class="text-uppercase">{{menu.name}}</span>
                     </a>
-                    <a class="nav-link dropdown-toggle text-uppercase" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="(applicationData.menus |filterMenu:menu.idMenu).length > 0">{{menu.name}}</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li class="dropdown" *ngFor="let submenu of (applicationData.menus | sort:'orden' |filterMenu:menu.idMenu)">
-                            <a class="nav-link text-uppercase" href="#" *ngIf="(applicationData.menus |filterMenu:submenu.idMenu).length == 0">{{submenu.name}}</a>
-                            <a class="nav-link text-uppercase dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="(applicationData.menus |filterMenu:submenu.idMenu).length > 0">{{submenu.name}}</a>
-                            <ul class="dropdown-submenu" aria-labelledby="navbarDropdown">
+                    <a class="nav-link text-uppercase" href="#" id="dropdownMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="(applicationData.menus |filterMenu:menu.idMenu).length > 0">{{menu.name}}
+                        <i class="fas fa-angle-down fa-xs m-1"></i>
+                    </a>
+                    <ul aria-labelledby="dropdownMenu1" class="dropdown-menu border-0 shadow">
+                        <li *ngFor="let submenu of (applicationData.menus | sort:'orden' |filterMenu:menu.idMenu)">
+                            <a href="#" class="dropdown-item" *ngIf="(applicationData.menus |filterMenu:submenu.idMenu).length == 0">{{submenu.name}}</a>
+                        </li>
+                        <!-- <li class="dropdown-divider"></li> -->
+                        <!-- Level two dropdown-->
+                        <li class="dropdown-submenu" *ngFor="let submenu of (applicationData.menus | sort:'orden' |filterMenu:menu.idMenu)">
+                            <a id="dropdownMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item" *ngIf="(applicationData.menus |filterMenu:submenu.idMenu).length > 0">{{submenu.name}}
+                                <i class="fas fa-angle-right fa-xs m-1"></i>
+                            </a>
+                            <ul aria-labelledby="dropdownMenu2" class="dropdown-menu border-0 shadow">
                                 <li *ngFor="let submenu1 of (applicationData.menus | sort:'orden' |filterMenu:submenu.idMenu)">
-                                    <a class="nav-link text-uppercase" href="#">{{submenu1.name}}</a>
+                                    <a tabindex="-1" href="#" class="dropdown-item">{{submenu1.name}}</a>
                                 </li>
                             </ul>
-
                         </li>
+                        <!-- End Level two -->
                     </ul>
                 </li>
             </ul>
 
-
-            <!-- <ul class="navbar-nav mr-auto">
-                <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown2</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown3</a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-
-                    </ul>
-
-                </li>
-                <li><a href="#">Service</a></li>
-            </ul> -->
-
             <div class="justify-content-start mr-1 ">
-                <div id="profilePopOver ">
-                    <img [src]=" 'http://plant8.sanmina.com:8080/SanmAPI/getImageUser/?employee='+user.username " alt="User profile picture " width="40 " height="40 " class="rounded-circle mr-2 " triggers="mouseenter:mouseleave " [popover]="popUser
+                <div id="profilePopOver">
+                    <img [src]=" 'http://plant8.sanmina.com:8080/SanmAPI/getImageUser/?employee='+user.username " alt="User profile picture " width="40 " height="40 " class="rounded-circle mr-2" triggers="mouseenter:mouseleave " [popover]="popUser
                                 " popoverTitle="User information " placement="bottom ">
-                    <small class="text-bold text-secondary uppercase ">
+                    <small class="text-bold nav-item uppercase ">
             {{user.username| uppercase}}</small>
                 </div>
             </div>
@@ -86,7 +60,7 @@
         </form>
     </div>
 </nav>
-<nav class="navbar navbar-dark bg-dark w-100 p-3 " style="box-shadow: 1px 5px 12px grey; height: 33px; ">
+<nav class="navbar w-100 p-3 " style="box-shadow: 1px 5px 12px grey; height: 33px; ">
     <div class="col-md-1 float-left ">
         <a class="navbar-brand float-left " style="margin-top: -23px; margin-left: -30px; ">
             <button class="btn btn-secondary btn-sm " (click)="back() ">
@@ -101,11 +75,11 @@
     </div>
 
     <div class="col-md-1 float-right ">
-
-        <a class="nav-link dropdown-toggle float-right text-white " id="navbarDropdown " role="button " data-toggle="dropdown " aria-haspopup="true " aria-expanded="false " style="margin-top: -18px ">
+        <a class="nav-link float-right text-white " id="navbarDropdown " role="button " data-toggle="dropdown " aria-haspopup="true " aria-expanded="false " style="margin-top: -18px ">
             <small class="text-uppercase font-weight-bold text-white ">
-        {{applicationconfig.plant}}
-      </small>
+                {{applicationconfig.plant}}
+            </small>
+            <i class="fas fa-angle-down fa-xs m-1"></i>
         </a>
         <div class="dropdown-menu " aria-labelledby="navbarDropdown ">
             <a class="dropdown-item-sanmina-danger "><small class="text-secondary ">PLANTA 2</small></a>
@@ -225,12 +199,12 @@
 <!--pop over user-->
 <ng-template #popUser>
     <div>
-        <div class="col-md-4 ">
+        <div class="col-md-2 ml-5">
             <img class="rounded-circle shadow " width="80 " height="80 " [src]=" 'http://plant8.sanmina.com:8080/SanmAPI/getImageUser/?employee='+user.username " />
         </div>
-        <div class="col-md-6 ">
-            <div id="NamePopover ">{{user.name}}</div>
-            <div id="employeNumber ">{{user.number}}</div>
+        <div class="col-md-6 ml-4">
+            <div id="NamePopover" style="color: rgb(255, 110, 74)">{{user.name}}</div>
+            <div id="employeNumber"><b>{{user.number}}</b></div>
             <div class="text-secondary logBy ">Login By: Google</div>
             <!-- {{user.loginType}} -->
         </div>
@@ -239,9 +213,9 @@
 </ng-template>
 <!--pop over application-->
 <ng-template #popAplication>
-    <div class="col-md-4 ">
+    <div class="col-md-4 ml-5">
         <div id="NamePopover ">{{applicationconfig.application}}</div>
         <div id="employeNumber ">v: {{applicationconfig.version}}</div>
         <div class="text-gray "></div>
     </div>
-</ng-template>+
+</ng-template>

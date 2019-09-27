@@ -15,8 +15,7 @@
             <ul class="navbar-nav mr-3">
                 <!-- Level one dropdown -->
                 <li class="nav-item dropdown" *ngFor="let menu of (applicationData.menus | sort:'orden' |filterMenu:0 )">
-                    <a class="nav-link" href="#" routerLink='{{menu.link}}'
-                      *ngIf="(applicationData.menus |filterMenu:menu.idMenu).length == 0">
+                    <a class="nav-link" href="#" routerLink='{{menu.link}}' *ngIf="(applicationData.menus |filterMenu:menu.idMenu).length == 0">
                         <i *ngIf="menu.name == 'Home'" class="fas fa-home"></i>
                         <span *ngIf="menu.name != 'Home'" class="text-uppercase">{{menu.name}}</span>
                     </a>
@@ -25,8 +24,7 @@
                     </a>
                     <ul aria-labelledby="dropdownMenu1" class="dropdown-menu border-0 shadow">
                         <li *ngFor="let submenu of (applicationData.menus | sort:'orden' |filterMenu:menu.idMenu)">
-                            <a href="#" routerLink='{{submenu.link}}' class="dropdown-item"
-                              *ngIf="(applicationData.menus |filterMenu:submenu.idMenu).length == 0">{{submenu.name}}</a>
+                            <a href="#" routerLink='{{submenu.link}}' class="dropdown-item" *ngIf="(applicationData.menus |filterMenu:submenu.idMenu).length == 0">{{submenu.name}}</a>
                         </li>
                         <!-- Level two dropdown-->
                         <li class="dropdown-submenu" *ngFor="let submenu of (applicationData.menus | sort:'orden' |filterMenu:menu.idMenu)">
@@ -35,8 +33,7 @@
                             </a>
                             <ul aria-labelledby="dropdownMenu2" class="dropdown-menu border-0 shadow">
                                 <li *ngFor="let submenu1 of (applicationData.menus | sort:'orden' |filterMenu:submenu.idMenu)">
-                                    <a tabindex="-1" routerLink='{{submenu1.link}}' href="#"
-                                      class="dropdown-item">{{submenu1.name}}</a>
+                                    <a tabindex="-1" routerLink='{{submenu1.link}}' href="#" class="dropdown-item">{{submenu1.name}}</a>
                                 </li>
                             </ul>
                         </li>

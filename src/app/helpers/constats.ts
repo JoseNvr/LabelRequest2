@@ -9,7 +9,7 @@ export class Constants {
 
          public static Version: String = "1.0";
 
-        //  public static application: String = "SmartVisit";
+         //  public static application: String = "SmartVisit";
          public static application: String = "BasicTemplate";
 
          public static applicationName: String = "Basic Template";
@@ -27,6 +27,5 @@ export class Constants {
          public static localStorage: string =
            Constants.application + "_dataAuth";
 
-         public static plantLS: string =
-           Constants.application + "_plant";
+         public static plantLS: string = Constants.application + "_plant";
        }

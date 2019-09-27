@@ -1,21 +1,17 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { FormsModule } from "@angular/forms";
-import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
-
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { BrowserModule } from "@angular/platform-browser";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ModalModule } from "ngx-bootstrap/modal";
+import { PopoverModule } from "ngx-bootstrap/popover";
+import { AppComponent } from "./app.component";
+import { BasicAuthInterceptor } from "./helpers/interceptor/basic-auth-interceptor";
+import { HomeAct } from "./homeact.service";
+import { LoginAct } from "./loginact.service";
 import { LoginService } from "./modules/login/login.service";
 import { Notify } from "./modules/notify/notify";
-import { LoginAct } from "./loginact.service";
-import { HomeAct } from "./homeact.service";
-
-import { AppComponent } from "./app.component";
-
 import { AppRoutingModule } from "./routes.module";
-
-import { PopoverModule } from "ngx-bootstrap/popover";
-import { ModalModule } from "ngx-bootstrap/modal";
-import { BasicAuthInterceptor } from "./helpers/interceptor/basic-auth-interceptor";
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +28,12 @@ import { BasicAuthInterceptor } from "./helpers/interceptor/basic-auth-intercept
     LoginAct,
     HomeAct,
     Notify,
-    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BasicAuthInterceptor,
+      deps: [Router, ActivatedRoute],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
       this.currentPlant = localStorage.getItem(Constants.plantLS);
     }
     this.charging.hide();
-    // this.notify.setNotification("Login Success", message, "success");
+    this.notify.setNotification("Login Success", message, "success");
     switch (this.router.url) {
       case "/": {
         this.currentRoute = "home";
@@ -106,7 +106,7 @@ export class HomeComponent implements OnInit {
           res => {
             this.generalresponse = res;
             console.log(res);
-            
+
             // this.loginResponse = this.generalresponse.data;
             // this.loginResponse.loginType = "Google";
             // this.user = this.loginResponse.userInfo;

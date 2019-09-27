@@ -1,17 +1,31 @@
-import { Injectable } from "@angular/core";
 import {
-  HttpRequest,
-  HttpHandler,
+  HttpErrorResponse,
   HttpEvent,
-  HttpInterceptor
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
 } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Injectable } from "@angular/core";
+import {  Router } from "@angular/router";
+import { Observable, of } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { LoginResponse } from "src/app/models/login/login.model";
 import { Constants } from "../constats";
 
 @Injectable()
 export class BasicAuthInterceptor implements HttpInterceptor {
+  constructor(private router: Router) {}
   private loginResponse: LoginResponse;
+  private handleAuthError(err: HttpErrorResponse): Observable<any> {
+    if (err.status === 403) {
+      localStorage.removeItem(Constants.localStorage);
+      this.router.navigate(["/login"], {
+        queryParams: { returnUrl: this.router.url }
+      });
+      return of(err.message);
+    }
+    throw err;
+  }
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -30,6 +44,10 @@ export class BasicAuthInterceptor implements HttpInterceptor {
     } else {
       request = request.clone();
     }
-    return next.handle(request);
+    return next.handle(request).pipe(catchError((error, caught) => {
+      console.log(error);
+      this.handleAuthError(error);
+      return of(error);
+    }) as any);
   }
 }

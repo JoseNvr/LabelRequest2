@@ -10,6 +10,7 @@ export class Prueba1Component implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("Hi, Hello World");
   }
 
 }

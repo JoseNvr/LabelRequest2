@@ -31,7 +31,7 @@ import { AppRoutingModule } from "./routes.module";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: BasicAuthInterceptor,
-      deps: [Router, ActivatedRoute],
+      deps: [Router],
       multi: true
     }
   ],

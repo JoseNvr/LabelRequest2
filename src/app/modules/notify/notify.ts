@@ -19,7 +19,8 @@ export class Notify {
             text: text,
             type: type,
             styling: 'bootstrap3',
-            delay: '2000'
+            delay: '1000',
+            clickToClose: true
         });
     }
 }

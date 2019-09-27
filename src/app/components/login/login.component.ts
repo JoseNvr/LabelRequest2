@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   private loginResponse: LoginResponse;
   private subscribeUser: Subscription;
   public user: User;
-  public params: { user?: string; password?: string; application?: String } = {
+  public params: { user?: string; password?: string; application?: String; plant?: string } = {
     application: Constants.application
   };
   applicationconfig = {
@@ -43,13 +43,16 @@ export class LoginComponent implements OnInit {
     public router: Router,
     private socialAuthService: AuthService,
     private notify: Notify
-  ) {}
+  ) { }
 
   ngOnInit() {
     // setTimeout(() => this.singinwhitgoogle(), 1000);
   }
 
   singin() {
+     if (localStorage.getItem(Constants.plantLS)) {
+          this.params.plant = localStorage.getItem(Constants.plantLS);
+        } 
     this.loading.show();
     this.subscribeUser = this.loginService.getUserInfo(this.params).subscribe(
       res => {
@@ -87,13 +90,17 @@ export class LoginComponent implements OnInit {
     socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
     this.socialAuthService.signIn(socialPlatformProvider).then(
       userData => {
-        const userDate = {
+        let userParams = {
           user: userData.email,
-          application: this.params.application
+          application: this.params.application,
+          plant: undefined
         };
         // Now sign-in with userData
+        if (localStorage.getItem(Constants.plantLS)) {
+          userParams.plant = localStorage.getItem(Constants.plantLS);
+        } 
         this.loading.show();
-        this.subscribeUser = this.loginService.getUserInfo(userDate).subscribe(
+        this.subscribeUser = this.loginService.getUserInfo(userParams).subscribe(
           res => {
             this.generalresponse = res;
             this.loginResponse = this.generalresponse.data;
@@ -127,7 +134,7 @@ export class LoginComponent implements OnInit {
           }
         );
       },
-      error => {}
+      error => { }
     );
   }
   ngOnDestroy(): void {

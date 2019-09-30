@@ -17,7 +17,7 @@ declare var $: any;
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
-  @ViewChild("modalCharg") charging: ModalDirective;
+  @ViewChild("modalCharg", { static: true }) charging: ModalDirective;
   public applicationconfig = {
     version: Constants.Version,
     application: Constants.application,
@@ -37,7 +37,12 @@ export class HomeComponent implements OnInit {
   public currentRoute;
   public currentPlant;
   public plants;
-  public params: { user?: string; password?: string; application?: String; plant?: string } = {
+  public params: {
+    user?: string;
+    password?: string;
+    application?: String;
+    plant?: string;
+  } = {
     application: Constants.application
   };
 
@@ -48,7 +53,7 @@ export class HomeComponent implements OnInit {
     public homeService: HomeService,
     public notify: Notify,
     public loginService: LoginService
-  ) { }
+  ) {}
 
   ngOnInit() {
     const message = localStorage.getItem("message");
@@ -58,10 +63,10 @@ export class HomeComponent implements OnInit {
     );
     this.user = this.applicationData.userInfo;
     this.plants = this.applicationData.sites;
-    if(!localStorage.getItem(Constants.plantLS)){
+    if (!localStorage.getItem(Constants.plantLS)) {
       this.currentPlant = this.plants[0].name;
-      localStorage.setItem(Constants.plantLS,this.currentPlant);
-    }else{
+      localStorage.setItem(Constants.plantLS, this.currentPlant);
+    } else {
       this.currentPlant = localStorage.getItem(Constants.plantLS);
     }
     this.charging.hide();
@@ -77,47 +82,54 @@ export class HomeComponent implements OnInit {
       }
     }
     this.currentYear = date.getFullYear();
-    $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
-      if (!$(this).next().hasClass('show')) {
-        $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+    $(".dropdown-menu a.dropdown-toggle").on("click", function(e) {
+      if (
+        !$(this)
+          .next()
+          .hasClass("show")
+      ) {
+        $(this)
+          .parents(".dropdown-menu")
+          .first()
+          .find(".show")
+          .removeClass("show");
       }
       var $subMenu = $(this).next(".dropdown-menu");
-      $subMenu.toggleClass('show');
+      $subMenu.toggleClass("show");
 
-      $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
-        $('.dropdown-submenu .show').removeClass("show");
-      });
+      $(this)
+        .parents("li.nav-item.dropdown.show")
+        .on("hidden.bs.dropdown", function(e) {
+          $(".dropdown-submenu .show").removeClass("show");
+        });
 
       return false;
     });
-
   }
 
   changeCurrentPlant(plant) {
     this.currentPlant = plant;
-    localStorage.setItem(Constants.plantLS,this.currentPlant);
+    localStorage.setItem(Constants.plantLS, this.currentPlant);
     //  userData => {
-        let userParams = {
-          user: this.user.email,
-          application: this.params.application,
-          plant: this.currentPlant
-        };
-        this.subscribeUser = this.loginService.getUserInfo(userParams).subscribe(
-          res => {
-            this.generalresponse = res;
-            console.log(res);
+    let userParams = {
+      user: this.user.email,
+      application: this.params.application,
+      plant: this.currentPlant
+    };
+    this.subscribeUser = this.loginService.getUserInfo(userParams).subscribe(
+      res => {
+        this.generalresponse = res;
+        console.log(res);
 
-            // this.loginResponse = this.generalresponse.data;
-            // this.loginResponse.loginType = "Google";
-            // this.user = this.loginResponse.userInfo;
-          },
-          error => {
-          },
-          () => {
-          }
-        );
-      // },
-      // error => { }
+        // this.loginResponse = this.generalresponse.data;
+        // this.loginResponse.loginType = "Google";
+        // this.user = this.loginResponse.userInfo;
+      },
+      error => {},
+      () => {}
+    );
+    // },
+    // error => { }
   }
 
   logout() {

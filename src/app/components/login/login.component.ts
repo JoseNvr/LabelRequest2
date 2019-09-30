@@ -20,7 +20,7 @@ declare var $: any;
   styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-  @ViewChild("LoadingModal") loading: ModalDirective;
+  @ViewChild("LoadingModal", { static: true }) loading: ModalDirective;
   private generalresponse: GeneralResponse;
   private loginResponse: LoginResponse;
   private subscribeUser: Subscription;

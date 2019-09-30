@@ -9,8 +9,8 @@ import { Subscription } from "rxjs";
   styleUrls: ["./principal.component.scss"]
 })
 export class PrincipalComponent implements OnInit, OnDestroy {
-  @ViewChild("modalCharg") charging: ModalDirective;
-  @ViewChild("modalConfirm") confirm: ModalDirective;
+  @ViewChild("modalCharg", { static: true }) charging: ModalDirective;
+  @ViewChild("modalConfirm", { static: true }) confirm: ModalDirective;
   public serial_number: string;
   public part_number: string;
   public reference1: string;
@@ -40,7 +40,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
       );
 
     const postTestSub: Subscription = this.principalService
-      .postTest({ "test": "test_post" })
+      .postTest({ test: "test_post" })
       .subscribe(
         res => {
           // console.log(res);

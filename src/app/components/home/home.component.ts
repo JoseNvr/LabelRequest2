@@ -8,7 +8,10 @@ import { HomeService } from "../../modules/home/home.service";
 import { Constants } from "../../helpers/constats";
 import { Subscription } from "rxjs";
 import { LoginService } from "../../modules/login/login.service";
-import { GeneralResponse } from "src/app/models/login/login.model";
+import {
+  GeneralResponse,
+  LoginResponse
+} from "src/app/models/login/login.model";
 declare var $: any;
 
 @Component({
@@ -21,6 +24,7 @@ export class HomeComponent implements OnInit {
   public applicationconfig = {
     version: Constants.Version,
     application: Constants.application,
+    applicationName: Constants.applicationName,
     applicationPath: Constants.applicationPath,
     logo: Constants.logo,
     ico: Constants.ico,
@@ -28,11 +32,10 @@ export class HomeComponent implements OnInit {
     localStorage: Constants.localStorage
   };
   public subscriptions: Subscription[] = [];
-  private subscribeUser: Subscription;
   private generalresponse: GeneralResponse;
+  private loginResponse: LoginResponse;
   public user: User;
   public applicationData: ApplicationData;
-  // public menuList = [];
   public currentYear;
   public currentRoute;
   public currentPlant;
@@ -82,6 +85,7 @@ export class HomeComponent implements OnInit {
       }
     }
     this.currentYear = date.getFullYear();
+
     $(".dropdown-menu a.dropdown-toggle").on("click", function(e) {
       if (
         !$(this)
@@ -110,26 +114,25 @@ export class HomeComponent implements OnInit {
   changeCurrentPlant(plant) {
     this.currentPlant = plant;
     localStorage.setItem(Constants.plantLS, this.currentPlant);
-    //  userData => {
-    let userParams = {
+    const userParams = {
       user: this.user.email,
       application: this.params.application,
       plant: this.currentPlant
     };
-    this.subscribeUser = this.loginService.getUserInfo(userParams).subscribe(
+    const subscribeUser = this.loginService.getUserInfo(userParams).subscribe(
       res => {
         this.generalresponse = res;
-        console.log(res);
-
-        // this.loginResponse = this.generalresponse.data;
-        // this.loginResponse.loginType = "Google";
-        // this.user = this.loginResponse.userInfo;
+        this.loginResponse = this.generalresponse.data;
+        this.loginResponse.loginType = this.applicationData.loginType;
+        localStorage.setItem(
+          this.applicationconfig.localStorage,
+          JSON.stringify(this.loginResponse)
+        );
       },
       error => {},
       () => {}
     );
-    // },
-    // error => { }
+    this.subscriptions.push(subscribeUser);
   }
 
   logout() {
@@ -154,11 +157,11 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       switch (this.router.url) {
         case "/": {
-          this.currentRoute = "home";
+          this.currentRoute = "Home";
           break;
         }
         case "/Prueba1link": {
-          this.currentRoute = "prueba1";
+          this.currentRoute = "Prueba1";
           break;
         }
       }

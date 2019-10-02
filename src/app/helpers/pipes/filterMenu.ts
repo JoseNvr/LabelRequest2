@@ -12,13 +12,11 @@ export class FilterMenuPipe implements PipeTransform {
       if (item.idFatherMenu != null) {
         idFatherMenu = item.idFatherMenu;
       }
-      if (field != 0 && item.idFatherMenu != 0) {
-        if(item.idFatherMenu == field){
+      if (field !== 0 && item.idFatherMenu !== 0) {
+        if (item.idFatherMenu === field) {
           idFatherMenu = item.idFatherMenu;
         }
       }
-      // console.log(array);
-      // return idFatherMenu === 0;
       return idFatherMenu === field;
     });
   }

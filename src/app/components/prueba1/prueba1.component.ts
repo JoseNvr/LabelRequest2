@@ -20,7 +20,7 @@ export class Prueba1Component implements OnInit, OnDestroy {
       .getTest({ test: "test_get" })
       .subscribe(
         res => {
-          // console.log(res);
+          console.log(res);
         },
         error => {
           console.log(error);
@@ -34,7 +34,7 @@ export class Prueba1Component implements OnInit, OnDestroy {
       .postTest({ test: "test_post" })
       .subscribe(
         res => {
-          // console.log(res);
+          console.log(res);
         },
         error => {
           console.log(error);

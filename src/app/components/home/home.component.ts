@@ -25,10 +25,8 @@ export class HomeComponent implements OnInit {
     version: Constants.Version,
     application: Constants.application,
     applicationName: Constants.applicationName,
-    applicationPath: Constants.applicationPath,
     logo: Constants.logo,
     ico: Constants.ico,
-    plant: Constants.plant,
     localStorage: Constants.localStorage
   };
   public subscriptions: Subscription[] = [];
@@ -98,12 +96,12 @@ export class HomeComponent implements OnInit {
           .find(".show")
           .removeClass("show");
       }
-      var $subMenu = $(this).next(".dropdown-menu");
-      $subMenu.toggleClass("show");
+      const subMenu = $(this).next(".dropdown-menu");
+      subMenu.toggleClass("show");
 
       $(this)
         .parents("li.nav-item.dropdown.show")
-        .on("hidden.bs.dropdown", function(e) {
+        .on("hidden.bs.dropdown", function() {
           $(".dropdown-submenu .show").removeClass("show");
         });
 

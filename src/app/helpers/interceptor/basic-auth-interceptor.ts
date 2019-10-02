@@ -17,7 +17,8 @@ export class BasicAuthInterceptor implements HttpInterceptor {
   constructor(private router: Router) {}
   private loginResponse: LoginResponse;
   private handleAuthError(err: HttpErrorResponse): Observable<any> {
-    if (err.status === 403) {
+    console.log(err);
+    if (err.status === 403 || err.status === 0) {
       localStorage.removeItem(Constants.localStorage);
       this.router.navigate(["/login"], {
         queryParams: { returnUrl: this.router.url }

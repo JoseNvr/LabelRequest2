@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
   applicationconfig = {
     name: Constants.applicationName + " " + Constants.Version,
     application: Constants.applicationName,
-    applicationPath: Constants.applicationPath,
     logo: Constants.logo,
     ico: Constants.ico,
     localStorage: Constants.localStorage

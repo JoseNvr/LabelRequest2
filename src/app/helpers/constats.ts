@@ -1,31 +1,24 @@
 export class Constants {
-         public static PRODUCTION: boolean = !window.location
-           .toString()
-           .includes("localhost");
+  public static PRODUCTION: boolean = !window.location
+    .toString()
+    .includes("localhost");
 
-         public static SERVER: string = Constants.PRODUCTION
-           ? "/GettingStarted/"
-           : "http://127.0.0.1:8080/GettingStarted/";
+  public static application: String = "BasicTemplate";
+  public static applicationName: String = "Basic Template";
 
-         public static Version: String = "1.0";
+  public static SERVER: string = Constants.PRODUCTION
+    ? "/" + Constants.application + "/"
+    : "http://127.0.0.1:8080/" + Constants.application + "/";
 
-         //  public static application: String = "SmartVisit";
-         public static application: String = "BasicTemplate";
+  public static Version: String = "1.0";
 
-         public static applicationName: String = "Basic Template";
 
-         public static applicationPath: String = "";
+  public static logo: String = "../../assets/sanmina/application/angular.png";
 
-         public static logo: String =
-           "../../assets/sanmina/application/angular.png";
+  public static ico: String =
+    "../../../../../../sanmina/images/application/favico.ico";
 
-         public static ico: String =
-           "../../../../../../sanmina/images/application/favico.ico";
+  public static localStorage: string = Constants.application + "_dataAuth";
 
-         public static plant: String = "Planta 8";
-
-         public static localStorage: string =
-           Constants.application + "_dataAuth";
-
-         public static plantLS: string = Constants.application + "_plant";
-       }
+  public static plantLS: string = Constants.application + "_plant";
+}

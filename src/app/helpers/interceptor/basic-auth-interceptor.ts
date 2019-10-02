@@ -17,7 +17,6 @@ export class BasicAuthInterceptor implements HttpInterceptor {
   constructor(private router: Router) {}
   private loginResponse: LoginResponse;
   private handleAuthError(err: HttpErrorResponse): Observable<any> {
-    console.log(err);
     if (err.status === 403 || err.status === 0) {
       localStorage.removeItem(Constants.localStorage);
       this.router.navigate(["/login"], {
@@ -41,12 +40,10 @@ export class BasicAuthInterceptor implements HttpInterceptor {
           "Content-Type": "application/json; charset=utf-8"
         }
       });
-      console.log(request);
     } else {
       request = request.clone();
     }
     return next.handle(request).pipe(catchError((error, caught) => {
-      console.log(error);
       this.handleAuthError(error);
       return of(error);
     }) as any);

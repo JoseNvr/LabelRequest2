@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
-import { AuthService, GoogleLoginProvider } from "angular-6-social-login";
+import { AuthService, GoogleLoginProvider } from "angularx-social-login";
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { Subscription } from "rxjs";
 import { Constants } from "../../helpers/constats";

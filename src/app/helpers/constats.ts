@@ -13,10 +13,9 @@ export class Constants {
   public static Version: String = "1.0";
 
 
-  public static logo: String = "../../assets/sanmina/application/angular.png";
+  public static logo: String = "assets/sanmina/application/angular.png";
 
-  public static ico: String =
-    "../../../../../../sanmina/images/application/favico.ico";
+  public static ico: String ="assets/sanmina/images/application/favico.ico";
 
   public static localStorage: string = Constants.application + "_dataAuth";
 

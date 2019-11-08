@@ -134,8 +134,14 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem(Constants.localStorage);
-    this.router.navigate(["login"]);
+    if (
+      confirm(
+        "If you logout, you will logout from all google services of your browser. Are you sure?"
+      )
+    ) {
+      localStorage.removeItem(Constants.localStorage);
+      location.href = "https://accounts.google.com/Logout";
+    }
   }
   changeRoute(currentRoute: string): void {
     switch (currentRoute) {

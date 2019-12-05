@@ -113,7 +113,7 @@ export class HomeComponent implements OnInit {
     this.currentPlant = plant;
     localStorage.setItem(Constants.plantLS, this.currentPlant);
     const userParams = {
-      user: this.user.email,
+      user: this.user.mail,
       application: this.params.application,
       plant: this.currentPlant
     };

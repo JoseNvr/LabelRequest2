@@ -1,7 +1,8 @@
 <title>{{applicationconfig.applicationName}}</title>
 
 <!-- !Primary nav bar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light pr-0 pt-0 pb-0 pl-0" id="primaryNavbar" role="navigation">
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light pr-0 pt-0 pb-0 pl-0" id="primaryNavbar"
+  role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <a class="navbar-brand justify-content-center" href="#">
     <img alt="" src="{{ applicationconfig.logo }}" class="d-flex justify-content-end mtop-5 imgIcon"
@@ -55,11 +56,11 @@
       </ul>
       <div class="justify-content-start mr-3">
         <div id="profilePopOver">
-          <img [src]="'http://plant8.sanmina.com:8080/SanmAPI/getImageUser/?employee='+user.username"
+          <img [src]="'http://plant8.sanmina.com:8080/SanmAPI/getImageUser/?employee='+user.userName"
             alt="User profile picture" width="40" height="40" class="rounded-circle mr-2 pointer"
             triggers="mouseenter:mouseleave" [popover]="popUser" popoverTitle="User information" placement="bottom">
           <a class="nav-item uppercase">
-            {{user.username| uppercase}}</a>
+            {{user.userName| uppercase}}</a>
         </div>
       </div>
       <div class="float-right mr-3">
@@ -177,7 +178,7 @@
     <!-- /.modal-dialog -->
   </div>
 
-  <div id="footer" class="col-md-12">
+  <footer id="footer" class="col-md-12">
     <div class="text-center">
       <strong class="uppercase"><a href="http://www.sanmina.com/company-profile/legal-information/" target="_blank">
           <small>
@@ -188,14 +189,14 @@
         <small>
           <font color="red">POWERED BY:</font> MEXICO RAPID INNOVATION LAB - {{currentYear}}
         </small>
-        <a href="http://www.sanmina.com/company-profile/safe-harbor-statement/"><small> <u>SAFE HARBOR
+        <a href="http://www.sanmina.com/company-profile/safe-harbor-statement/" target="_blank"><small> <u>SAFE HARBOR
               STATEMENT</u></small></a>
       </strong>
     </div>
     <!-- <div class="col-md-offset-12" id="iconFooter">
       <img class="img-circle" src="assets/sanmina/sanmina-100x56.png" id="bottomImg" />
     </div> -->
-  </div>
+  </footer>
 </div>
 <!-- Modals -->
 <!-- Confirm Modal -->
@@ -224,11 +225,11 @@
   <div>
     <div class="col-md-4">
       <img class="rounded-circle shadow" width="80" height="80"
-        [src]="'http://plant8.sanmina.com:8080/SanmAPI/getImageUser/?employee='+user.username" />
+        [src]="'http://plant8.sanmina.com:8080/SanmAPI/getImageUser/?employee='+user.userName" />
     </div>
     <div class="col-md-6">
-      <div id="NamePopover">{{user.name}}</div>
-      <div id="employeNumber">{{user.number}}</div>
+      <div id="NamePopover">{{user.name +' '+ user.lastName}}</div>
+      <div id="employeNumber">{{user.employeeNumber}}</div>
       <div class="text-secondary logBy">Login By: {{applicationData.loginType}}</div>
     </div>
   </div>

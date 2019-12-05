@@ -9,12 +9,13 @@ export interface ApplicationData {
 
 export interface User {
   active: boolean;
-  email: string;
+  mail: string;
   fullName: string;
+  lastName: string;
   id: number;
   name: string;
-  number: number;
-  username: string;
+  employeeNumber: number;
+  userName: string;
   message: string;
 }
 

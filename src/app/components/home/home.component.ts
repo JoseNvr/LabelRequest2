@@ -22,7 +22,8 @@ declare var $: any;
 export class HomeComponent implements OnInit {
   @ViewChild("modalCharg", { static: true }) charging: ModalDirective;
   public applicationconfig = {
-    version: Constants.Version,
+    applicationVersion: Constants.applicationVersion,
+    masterPageVersion: Constants.masterPageVersion,
     application: Constants.application,
     applicationName: Constants.applicationName,
     logo: Constants.logo,

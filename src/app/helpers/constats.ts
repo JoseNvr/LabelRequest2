@@ -10,7 +10,7 @@ export class Constants {
     ? "/" + Constants.application + "/"
     : "http://127.0.0.1:8080/" + Constants.application + "/";
 
-  public static masterPageVersion: String = "1.1.0.0";
+  public static masterPageVersion: String = "1.2.0.0";
 
   public static logo: String = "assets/sanmina/application/angular.png";
 

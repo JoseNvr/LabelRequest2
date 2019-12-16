@@ -1,9 +1,16 @@
+export interface GeneralApplicationData {
+  success: boolean;
+  data: ApplicationData;
+  message: string;
+}
+
 export interface ApplicationData {
   menus: Array<Menu>;
   profiles: Array<Profile>;
   sites: Array<Site>;
   userInfo: User;
   token: string;
+  applicationVersion: string;
   loginType: string;
 }
 

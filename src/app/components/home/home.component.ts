@@ -1,17 +1,17 @@
+import { Location, PlatformLocation } from "@angular/common";
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { PlatformLocation, Location } from "@angular/common";
 import { Router } from "@angular/router";
-import { User, ApplicationData } from "../../models/home/home.model";
-import { Notify } from "../../modules/notify/notify";
 import { ModalDirective } from "ngx-bootstrap/modal";
-import { HomeService } from "../../modules/home/home.service";
-import { Constants } from "../../helpers/constats";
 import { Subscription } from "rxjs";
-import { LoginService } from "../../modules/login/login.service";
 import {
   GeneralResponse,
   LoginResponse
 } from "src/app/models/login/login.model";
+import { Constants } from "../../helpers/constats";
+import { ApplicationData, User } from "../../models/home/home.model";
+import { HomeService } from "../../modules/home/home.service";
+import { LoginService } from "../../modules/login/login.service";
+import { Notify } from "../../modules/notify/notify";
 declare var $: any;
 
 @Component({
@@ -22,7 +22,7 @@ declare var $: any;
 export class HomeComponent implements OnInit {
   @ViewChild("modalCharg", { static: true }) charging: ModalDirective;
   public applicationconfig = {
-    applicationVersion: Constants.applicationVersion,
+    applicationVersion: "0.0.0.0",
     masterPageVersion: Constants.masterPageVersion,
     application: Constants.application,
     applicationName: Constants.applicationName,
@@ -30,11 +30,12 @@ export class HomeComponent implements OnInit {
     ico: Constants.ico,
     localStorage: Constants.localStorage
   };
-  public subscriptions: Subscription[] = [];
+  private subscriptions: Array<Subscription>;
   private generalresponse: GeneralResponse;
   private loginResponse: LoginResponse;
   public user: User;
   public applicationData: ApplicationData;
+  public applicationDataRefreshed: ApplicationData;
   public currentYear;
   public currentRoute;
   public currentPlant;
@@ -55,7 +56,9 @@ export class HomeComponent implements OnInit {
     public homeService: HomeService,
     public notify: Notify,
     public loginService: LoginService
-  ) {}
+  ) {
+    this.subscriptions = [];
+  }
 
   ngOnInit() {
     const message = localStorage.getItem("message");
@@ -63,16 +66,46 @@ export class HomeComponent implements OnInit {
     this.applicationData = JSON.parse(
       localStorage.getItem(Constants.localStorage)
     );
-    this.user = this.applicationData.userInfo;
-    this.plants = this.applicationData.sites;
+    if (this.applicationData.applicationVersion) {
+      this.applicationconfig.applicationVersion = this.applicationData.applicationVersion;
+    }
     if (!localStorage.getItem(Constants.plantLS)) {
       this.currentPlant = this.plants[0].name;
       localStorage.setItem(Constants.plantLS, this.currentPlant);
     } else {
       this.currentPlant = localStorage.getItem(Constants.plantLS);
     }
-    this.charging.hide();
-    this.notify.setNotification("Login Success", message, "success");
+    this.user = this.applicationData.userInfo;
+    this.plants = this.applicationData.sites;
+    const refreshApplicationData: Subscription = this.homeService
+      .RefreshApplicationData({
+        application: this.applicationconfig.application,
+        plant: this.currentPlant
+      })
+      .subscribe(
+        res => {
+          this.applicationDataRefreshed = res.data;
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          this.applicationData.sites = this.applicationDataRefreshed.sites;
+          this.applicationData.menus = this.applicationDataRefreshed.menus;
+          this.applicationData.profiles = this.applicationDataRefreshed.profiles;
+          this.applicationData.applicationVersion = this.applicationDataRefreshed.applicationVersion;
+          localStorage.setItem(
+            Constants.localStorage,
+            JSON.stringify(this.applicationData)
+          );
+          this.user = this.applicationData.userInfo;
+          this.plants = this.applicationData.sites;
+          this.applicationconfig.applicationVersion = this.applicationData.applicationVersion;
+          this.charging.hide();
+          this.notify.setNotification("Login Success", message, "success");
+        }
+      );
+    this.subscriptions.push(refreshApplicationData);
     switch (this.router.url) {
       case "/": {
         this.currentRoute = "home";
@@ -113,25 +146,7 @@ export class HomeComponent implements OnInit {
   changeCurrentPlant(plant) {
     this.currentPlant = plant;
     localStorage.setItem(Constants.plantLS, this.currentPlant);
-    const userParams = {
-      user: this.user.mail,
-      application: this.params.application,
-      plant: this.currentPlant
-    };
-    const subscribeUser = this.loginService.getUserInfo(userParams).subscribe(
-      res => {
-        this.generalresponse = res;
-        this.loginResponse = this.generalresponse.data;
-        this.loginResponse.loginType = this.applicationData.loginType;
-        localStorage.setItem(
-          this.applicationconfig.localStorage,
-          JSON.stringify(this.loginResponse)
-        );
-      },
-      error => {},
-      () => {}
-    );
-    this.subscriptions.push(subscribeUser);
+    location.href = "/";
   }
 
   logout() {

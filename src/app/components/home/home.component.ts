@@ -66,6 +66,8 @@ export class HomeComponent implements OnInit {
     this.applicationData = JSON.parse(
       localStorage.getItem(Constants.localStorage)
     );
+    this.user = this.applicationData.userInfo;
+    this.plants = this.applicationData.sites;
     if (this.applicationData.applicationVersion) {
       this.applicationconfig.applicationVersion = this.applicationData.applicationVersion;
     }
@@ -75,8 +77,6 @@ export class HomeComponent implements OnInit {
     } else {
       this.currentPlant = localStorage.getItem(Constants.plantLS);
     }
-    this.user = this.applicationData.userInfo;
-    this.plants = this.applicationData.sites;
     const refreshApplicationData: Subscription = this.homeService
       .RefreshApplicationData({
         application: this.applicationconfig.application,

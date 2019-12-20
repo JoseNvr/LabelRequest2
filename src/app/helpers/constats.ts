@@ -3,8 +3,8 @@ export class Constants {
     .toString()
     .includes("localhost");
 
-  public static application: String = "BasicTemplate";
-  public static applicationName: String = "Basic Template";
+  public static application: String = "RCUR";
+  public static applicationName: String = "RCUR System";
 
   public static SERVER: string = Constants.PRODUCTION
     ? "/" + Constants.application + "/"

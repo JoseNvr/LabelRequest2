@@ -146,7 +146,7 @@ export class HomeComponent implements OnInit {
   changeCurrentPlant(plant) {
     this.currentPlant = plant;
     localStorage.setItem(Constants.plantLS, this.currentPlant);
-    location.href = Constants.SERVER;
+    location.href = "/";
   }
 
   logout() {

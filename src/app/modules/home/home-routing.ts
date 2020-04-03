@@ -16,6 +16,10 @@ const routes: Routes = [
                 path: 'Prueba1',
                 loadChildren: 'src/app/modules/prueba1/prueba1.module#Prueba1Module', canActivate: [LoginAct]
             },
+            {
+                path: 'functions',
+                loadChildren: 'src/app/modules/functions/functions.module#FunctionsModule', canActivate: [LoginAct]
+            },
         ]
     }
 ]

@@ -1,0 +1,74 @@
+
+
+<mat-card id="matcardPrincipal">
+    <!-- <mat-card-title>
+            SMART PLANNER WEB
+    </mat-card-title> -->
+
+<!-- BARRA DE DESCRIPCION  -->
+    <div class="form-group row">
+        <div class="btn-group">
+               <button id="func-btn" type="button" class="btn btn-primary col-sm-15 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Funciones  </button>     
+            <div class="dropdown-menu">
+              <!-- <span *ngFor="let fun of funs"></span> -->
+              <a class="dropdown-item" href="#">GetCateory(ITEM)</a>
+              <!-- <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a> -->
+            </div>
+          </div>
+      <h4 class="col-sm-30 col-form-label">MUESTRA LA CATEGORIA DE UN NUMERO DE PARTE</h4>
+      <div> 
+        <button type="button" data-toggle="tooltip" title="Copy" id="copy-btn"  class="btn btn-primary"><i class="fas fa-copy"></i></button>
+        <button type="button" data-toggle="tooltip" title="Clear" id="clear-btn" class="btn btn-primary"><i class="fas fa-broom"></i></button>
+      </div> 
+      
+    </div>
+
+<!-- _________________________________________GRID_________________________________________________________________________________ -->
+<!-- AREA PARA INSERTAR DATOS  -->
+    <mat-grid-list  cols="10" rowHeight="1:1">
+        <mat-grid-tile id="fun" [colspan]=4>
+                  <div>
+                      <form>
+                          <div class="form-group row">
+                              <h5 class="col-sm-3 col-form-label">Insertar datos</h5>
+                              <button class="col-sm-6" type="button" class="btn btn-info"> Procesar  </button>
+                              <textarea  class="form-control" id="data" rows="25"></textarea>
+                            </div>
+                      </form>
+                    </div>   
+        </mat-grid-tile>
+<!-- RESULTADO DE LAS FUNCIONES (TABLE)-->
+
+        <mat-grid-tile [colspan]=6>
+       
+<div class="form-group row">
+    <div class="btn-group">
+    
+    </div>
+            <table class="table table-striped table-bordered table-sm" id="functionsTable"  cellspacing="0" >
+                <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Numero de parte</th>
+                      <th scope="col">Categoría</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let np of nps">
+                      <th scope="col">{{np.id}}</th>
+                    <th scope="col">{{np.np}}</th>
+                    <th scope="col">{{np.category}}</th>
+                  </tr>
+                </tbody>
+            </table>
+</div>
+
+ 
+        </mat-grid-tile>
+
+   
+    </mat-grid-list>
+    
+</mat-card>
+

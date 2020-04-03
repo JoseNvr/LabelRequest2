@@ -7,9 +7,9 @@ import { NgModule } from '@angular/core';
 // Define which component should be loaded based on the current URL
 export const routes: Routes = [
     { path: '', loadChildren: './modules/home/home.module#HomeModule', canActivate: [LoginAct] },
-    { path: 'login', loadChildren: './modules/login/login.module#LoginModule', canActivate: [HomeAct] }
+    { path: 'login', loadChildren: './modules/login/login.module#LoginModule', canActivate: [HomeAct] },
+    { path: 'functions', loadChildren: './modules/functions/functions.module#FunctionsModule', canActivate: [HomeAct] },
 ];
-
 @NgModule({
     imports: [
         RouterModule.forRoot(routes, {

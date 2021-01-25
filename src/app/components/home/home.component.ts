@@ -46,8 +46,8 @@ export class HomeComponent implements OnInit {
     application?: String;
     plant?: string;
   } = {
-    application: Constants.application
-  };
+      application: Constants.application
+    };
 
   constructor(
     public location: PlatformLocation,
@@ -118,7 +118,7 @@ export class HomeComponent implements OnInit {
     }
     this.currentYear = date.getFullYear();
 
-    $(".dropdown-menu a.dropdown-toggle").on("click", function(e) {
+    $(".dropdown-menu a.dropdown-toggle").on("click", function (e) {
       if (
         !$(this)
           .next()
@@ -135,7 +135,7 @@ export class HomeComponent implements OnInit {
 
       $(this)
         .parents("li.nav-item.dropdown.show")
-        .on("hidden.bs.dropdown", function() {
+        .on("hidden.bs.dropdown", function () {
           $(".dropdown-submenu .show").removeClass("show");
         });
 
@@ -150,13 +150,18 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
-    if (
-      confirm(
-        "If you logout, you will logout from all google services of your browser. Are you sure?"
-      )
-    ) {
+    if (this.applicationData.loginType == 'Google') {
+      if (
+        confirm("If you logout, you will logout from all google services of your browser. Are you sure?")
+      ) {
+        localStorage.removeItem(Constants.localStorage);
+        localStorage.removeItem(Constants.plantLS);
+        location.href = "https://accounts.google.com/Logout";
+      }
+    } else {
       localStorage.removeItem(Constants.localStorage);
-      location.href = "https://accounts.google.com/Logout";
+      localStorage.removeItem(Constants.plantLS);
+      location.href = "/" + this.applicationconfig.application + "/";
     }
   }
   changeRoute(currentRoute: string): void {

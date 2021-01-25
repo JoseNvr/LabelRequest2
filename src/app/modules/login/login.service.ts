@@ -11,13 +11,11 @@ import { map } from "rxjs/operators";
 export class LoginService {
   static ENDPOINT_GET_USER_INFO = Constants.SERVER + "Auth/User/";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getUserInfo(data: any): Observable<GeneralResponse> {
     return this.http
-      .get<GeneralResponse>(LoginService.ENDPOINT_GET_USER_INFO, {
-        params: data
-      })
+      .post<GeneralResponse>(LoginService.ENDPOINT_GET_USER_INFO, data)
       .pipe();
   }
 }

@@ -59,7 +59,7 @@
               <div class="form-group col-md-12">
                 <label class="float-left font-weight-bold mt-2">Password</label>
                 <input class="float-left form-control" [(ngModel)]="params.password" autocomplete="off" name="password"
-                  #password="ngModel" type="password" placeholder="***********">
+                  #password="ngModel" type="password" placeholder="***********" (keydown.enter)="singin()">
               </div>
             </form>
             <div class="col-md-12">

@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    setTimeout(() => this.singinwhitgoogle(), 1000);
+    // setTimeout(() => this.singinwhitgoogle(), 1000);
   }
 
   singin() {

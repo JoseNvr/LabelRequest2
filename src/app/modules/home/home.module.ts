@@ -9,12 +9,14 @@ import { CommonModule } from '@angular/common';
 import { HomeService } from './home.service';
 import { ArraySortPipe } from 'src/app/helpers/pipes/orderMenu';
 import { FilterMenuPipe } from 'src/app/helpers/pipes/filterMenu';
+import { LinkMenuPipe } from 'src/app/helpers/pipes/linkMenu';
 
 @NgModule({
     declarations: [
         HomeComponent,
         ArraySortPipe,
-        FilterMenuPipe
+        FilterMenuPipe,
+        LinkMenuPipe
     ],
     imports: [
         CommonModule,

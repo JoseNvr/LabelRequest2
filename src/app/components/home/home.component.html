@@ -22,8 +22,12 @@
         <!-- Level one dropdown -->
         <li class="nav-item dropdown" *ngFor="let menu of (applicationData.menus | sort:'orden' |filterMenu:0 )">
           <a class="nav-link" href="#" routerLink='{{menu.link}}'
-            *ngIf="(applicationData.menus |filterMenu:menu.idMenu).length == 0">
+            *ngIf="(applicationData.menus |filterMenu:menu.idMenu).length == 0 && !(menu|linkMenu)">
             <i *ngIf="menu.name == 'Home'" class="fas fa-home"></i>
+            <span *ngIf="menu.name != 'Home'" class="text-uppercase">{{menu.name}}</span>
+          </a>
+          <a class="nav-link" href="{{menu.link}}" target="_blank"
+            *ngIf="(applicationData.menus |filterMenu:menu.idMenu).length == 0 && (menu|linkMenu)">
             <span *ngIf="menu.name != 'Home'" class="text-uppercase">{{menu.name}}</span>
           </a>
           <a class="nav-link text-uppercase" href="#" id="dropdownMenu1" role="button" data-toggle="dropdown"
@@ -34,7 +38,9 @@
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu border-0 shadow">
             <li *ngFor="let submenu of (applicationData.menus | sort:'orden' |filterMenu:menu.idMenu)">
               <a href="#" routerLink='{{submenu.link}}' class="dropdown-item"
-                *ngIf="(applicationData.menus |filterMenu:submenu.idMenu).length == 0">{{submenu.name}}</a>
+                *ngIf="(applicationData.menus |filterMenu:submenu.idMenu).length == 0 && !(submenu|linkMenu)">{{submenu.name}}</a>
+              <a href="{{submenu.link}}" target="_blank" class="dropdown-item"
+                *ngIf="(applicationData.menus |filterMenu:submenu.idMenu).length == 0 && (submenu|linkMenu)">{{submenu.name}}</a>
             </li>
             <!-- Level two dropdown-->
             <li class="dropdown-submenu"
@@ -46,7 +52,10 @@
               </a>
               <ul aria-labelledby="dropdownMenu2" class="dropdown-menu border-0 shadow">
                 <li *ngFor="let submenu1 of (applicationData.menus | sort:'orden' |filterMenu:submenu.idMenu)">
-                  <a tabindex="-1" routerLink='{{submenu1.link}}' href="#" class="dropdown-item">{{submenu1.name}}</a>
+                  <a *ngIf="!(menu|linkMenu)" tabindex="-1" routerLink='{{submenu1.link}}' href="#"
+                    class="dropdown-item">{{submenu1.name}}</a>
+                  <a *ngIf="(submenu1|linkMenu)" tabindex="-1" href="{{submenu1.link}}" target="_blank"
+                    class="dropdown-item">{{submenu1.name}}</a>
                 </li>
               </ul>
             </li>

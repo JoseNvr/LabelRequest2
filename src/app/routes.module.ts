@@ -14,9 +14,10 @@ export const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forRoot(routes, {
-            useHash: false,
-            initialNavigation: "enabled"
-        }
+    useHash: false,
+    initialNavigation: "enabled",
+    relativeLinkResolution: 'legacy'
+}
         )
     ],
     exports: [RouterModule]

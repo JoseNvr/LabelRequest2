@@ -12,6 +12,8 @@ import { LoginAct } from "./loginact.service";
 import { LoginService } from "./modules/login/login.service";
 import { Notify } from "./modules/notify/notify";
 import { AppRoutingModule } from "./routes.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +23,8 @@ import { AppRoutingModule } from "./routes.module";
     FormsModule,
     AppRoutingModule,
     PopoverModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     LoginService,

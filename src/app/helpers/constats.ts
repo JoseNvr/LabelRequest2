@@ -3,8 +3,8 @@ export class Constants {
     .toString()
     .includes("localhost");
 
-  public static application: String = "NokiaPassword-DataCollector";
-  public static applicationName: String = "NokiaPassword-DataCollector";
+  public static application: String = "BasicTemplate";
+  public static applicationName: String = "BasicTemplate";
 
   public static SERVER: string = Constants.PRODUCTION
     ? "/" + Constants.application + "/"

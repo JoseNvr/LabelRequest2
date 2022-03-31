@@ -8,7 +8,8 @@ import { NgModule } from '@angular/core';
 export const routes: Routes = [
     { path: '', loadChildren: './modules/home/home.module#HomeModule', canActivate: [LoginAct] },
     { path: 'login', loadChildren: './modules/login/login.module#LoginModule', canActivate: [HomeAct] },
-    { path: '**', loadChildren: './modules/login/login.module#LoginModule', canActivate: [HomeAct] }
+    { path: '**', loadChildren: './modules/login/login.module#LoginModule', canActivate: [HomeAct] },
+  
 ];
 
 @NgModule({

@@ -111,8 +111,8 @@ export class HomeComponent implements OnInit {
         this.currentRoute = "home";
         break;
       }
-      case "/Prueba1link": {
-        this.currentRoute = "prueba1";
+      case "/p": {
+        this.currentRoute = "pedidosver";
         break;
       }
     }

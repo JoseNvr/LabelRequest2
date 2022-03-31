@@ -23,7 +23,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     //Cargar interfaz
-    this.mGetProjects();
+    
     this.mClearCollector();
     this.mGetEmployeeNumberFromLocalStorage();
     for (let i = 0; i < 10; i++) {
@@ -58,15 +58,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
     this.subscriptions.push(getTestSub);
     this.subscriptions.push(postTestSub);
   }
-  mGetProjects() {
-    var selectBox_Projects = document.getElementById('slProjects');
-    selectBox_Projects.appendChild(new Option("Select Base ID...", "N/A"));
-    Constants.Projects.forEach(option =>
-      selectBox_Projects.appendChild(
-        new Option(option.name, option.sfdc_id, option.selected)
-      )
-    );
-  }
+
   mGetEmployeeNumberFromLocalStorage(){
     //localStorage.getItem(Constants.localStorage);
     console.log(localStorage.getItem(Constants.localStorage));
@@ -74,31 +66,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
     var JsonData = JSON.parse(vlocalStorage);
     $('#txtEmployee').val(JsonData.userInfo.employeeNumber)
   }
-  OnSelectChange_Event(value) {
-    if (value != "N/A") {
-      var projectSelected = Constants.Projects.find(i => i.sfdc_id === value);
-      console.log(projectSelected);
-      if ($('#txtEmployee').val() != "") {
-        document.getElementById('txtPassword').removeAttribute('disabled');
-        $('#txtPasswordBarcode').val('');
-        $('#txtSerialNumber').val('');
-        $('#txtPassword').focus();
-      } else {
-        document.getElementById('txtEmployee').removeAttribute('disabled');
-        document.getElementById('txtPassword').removeAttribute('disabled');
-        $('#txtPasswordBarcode').val('');
-        $('#txtSerialNumber').val('');
-        $('#txtEmployee').focus();
-      }
-      document.getElementById('lblsfdcid').textContent = projectSelected.sfdc_id;
-      document.getElementById('lblStationType').textContent = projectSelected.station_type;
-      document.getElementById('lblStation').textContent = projectSelected.station;
-      document.getElementById('txtPasswordBarcode').setAttribute('disabled', 'disabled');
-      document.getElementById('txtSerialNumber').setAttribute('disabled', 'disabled');
-    } else {
-      this.mClearCollector();
-    }
-  }
+ 
   mClearCollector() {
     document.getElementById('txtEmployee').setAttribute('disabled', 'disabled');
     document.getElementById('txtPassword').setAttribute('disabled', 'disabled');
@@ -172,58 +140,8 @@ export class PrincipalComponent implements OnInit, OnDestroy {
       }
     }
   }
-  onKeypressEvent_Barcode(event: any) {
-    if (event.keyCode == 13) {
-      //console.log(event.target.value)
-      var vEmployee = $('#txtEmployee').val().toString().trim();
-      var vEmployeePassword = $('#txtPassword').val().toString().trim();
-      var vPasswordBarcode = $('#txtPasswordBarcode').val().toString().trim();
-      var vSfdcId = document.getElementById('lblsfdcid').textContent;;
-      if (vPasswordBarcode == "" && vEmployeePassword != "" && vEmployee != "") {
-        $('#txtPasswordBarcode').focus();
-      } else {
-        document.getElementById('txtPasswordBarcode').setAttribute('disabled', 'disabled');
-        this.mSetRquestOnConsole("Processing password barcode (" + vPasswordBarcode + ")");
-        let data = {
-          sfdc_id: vSfdcId,
-          password_barcode: vPasswordBarcode,
-          workstations_permited: Constants.WorkstationPermited
-        };
-        this.mValidatePasswordBarcode(data);  
-      }
-    }
-  }
-  onKeypressEvent_SerialNumber(event: any) {
-    if (event.keyCode == 13) {
-      //console.log(event.target.value)
-      var vEmployee = $('#txtEmployee').val().toString().trim();
-      var vEmployeePassword = $('#txtPassword').val().toString().trim();
-      var vPasswordBarcode = $('#txtPasswordBarcode').val().toString().trim();
-      var vUnitSerialNumber = $('#txtSerialNumber').val().toString().trim();
-      var vSfdcId = document.getElementById('lblsfdcid').textContent;
-      var vStationType = document.getElementById('lblStationType').textContent;
-      var Station = document.getElementById('lblStation').textContent;
-      if (vUnitSerialNumber == "" && vPasswordBarcode != "" && vEmployeePassword != "" && vEmployee != "") {
-        $('#txtSerialNumber').focus();
-      } else {
-        document.getElementById('txtSerialNumber').setAttribute('disabled', 'disabled');
-        this.mSetRquestOnConsole("Processing unit (" + vUnitSerialNumber + ")");
-        let data = {
-          serial_number : vUnitSerialNumber,
-          employee_number: vEmployee,
-          employee_password: vEmployeePassword,
-          sfdc_id: vSfdcId,
-          station_type: vStationType,
-          station: Station,
-          password_barcode_pettry : Constants.BarcodePretty,
-          password_barcode_uggly: Constants.BarcodeUggly,
-          part_number_barcode: Constants.PartnumberBarcode,
-          partnumbers_tp_permited: Constants.Partnumbers_top_level
-        };
-        this.mProcessUnitSerialNumber(data);
-      }
-    }
-  }
+
+  
   mProcessUnitSerialNumber(data: any) {
     this.principalService.ProcessUnitSerialNumber(data).subscribe(Result => {
       console.log(Result);

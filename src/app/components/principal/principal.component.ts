@@ -21,6 +21,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
   constructor(private principalService: PrincipalService,private notify: Notify) {
     this.subscriptions = [];
   }
+  
   ngOnInit() {
     //Cargar interfaz
     this.mGetProjects();

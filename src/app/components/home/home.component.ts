@@ -27,6 +27,9 @@ export class HomeComponent implements OnInit {
     application: Constants.application,
     applicationName: Constants.applicationName,
     logo: Constants.logo,
+    img1:Constants.img1,
+    img2:Constants.img2,
+    img3:Constants.img3,
     ico: Constants.ico,
     localStorage: Constants.localStorage
   };
@@ -115,6 +118,11 @@ export class HomeComponent implements OnInit {
         this.currentRoute = "prueba1";
         break;
       }
+      case "/VerPedidos": {
+        this.currentRoute = "ver-pedidos";
+        break;
+      }
+    
     }
     this.currentYear = date.getFullYear();
 
@@ -174,6 +182,10 @@ export class HomeComponent implements OnInit {
         this.currentRoute = "prueba1";
         break;
       }
+      case "/VerPedidos": {
+        this.currentRoute = "ver-pedidos";
+        break;
+      }
     }
   }
 
@@ -187,6 +199,10 @@ export class HomeComponent implements OnInit {
         }
         case "/Prueba1link": {
           this.currentRoute = "Prueba1";
+          break;
+        }
+        case "/VerPedidos": {
+          this.currentRoute = "VerPedidos";
           break;
         }
       }

@@ -3,8 +3,8 @@ export class Constants {
     .toString()
     .includes("localhost");
 
-  public static application: String = "BasicTemplate";
-  public static applicationName: String = "BasicTemplate";
+  public static application: String = "LabelRequest2";
+  public static applicationName: String = "LabelRequest2";
 
   public static SERVER: string = Constants.PRODUCTION
     ? "/" + Constants.application + "/"
@@ -12,7 +12,11 @@ export class Constants {
 
   public static masterPageVersion: String = "1.2.0.2";
 
-  public static logo: String = "assets/sanmina/application/angular.png";
+  public static logo: String = "assets/sanmina/application/sanmlogo.png";
+
+  public static img1: String = "assets/sanmina/application/sanmina1.jpeg";
+  public static img2: String = "assets/sanmina/application/manuf.jpg";
+  public static img3: String = "assets/sanmina/application/sanminamanf.jpg";
 
   public static ico: String = "assets/sanmina/images/application/favico.ico";
 

@@ -1,3 +1,5 @@
+
+
 .dropdown-submenu {
     position: relative;
 }
@@ -73,7 +75,29 @@ white:focus {
 .img-logo {
     height: 40px;
     width: 40px;
+
+    
 }
+#img1{
+    margin-top: 20px;
+    height: 500px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#img2{
+    margin-top: 20px;
+    height: 500px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+#img3{
+    margin-top: 20px;
+    height: 500px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
 
 .img-home {
     height: 150px;
@@ -114,8 +138,10 @@ white:focus {
 }
 
 .imgIcon {
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 35px;
+    margin-left: 30px;
+    
 }
 
 #primaryNavbar {
